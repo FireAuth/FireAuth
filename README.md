@@ -93,7 +93,7 @@ Changes a Firebase user's password.
 
 <a name="changeUserEmail"></a>
 ## changeUserEmail(oldEmail, newEmail, password, callback)
-Changes a Firebase user's email.
+Changes a Firebase user's email. (Must configure in Firebase Settings)
 
 **Kind**: global function  
 
