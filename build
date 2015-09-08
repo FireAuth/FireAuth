@@ -1,0 +1,13 @@
+#!/bin/bash
+# Builds to JS es5 and creates documentation
+
+babel FireAuth.js --out-file FireAuth-0.0.1.js
+
+echo "Compiled to es5."
+
+jsdoc2md FireAuth-0.0.1.js > docs.md
+
+echo "Built documentation."
+
+echo "Build Complete."
+
