@@ -1,6 +1,6 @@
 ## Classes
 <dl>
-<dt><a href="#_createClass">_createClass</a></dt>
+<dt><a href="#FireAuth">FireAuth</a></dt>
 <dd></dd>
 </dl>
 ## Functions
@@ -39,15 +39,11 @@
 <dd><p>Event handler checks any changes in user authentication</p>
 </dd>
 </dl>
-<a name="_createClass"></a>
-## _createClass
+<a name="FireAuth"></a>
+## FireAuth
 **Kind**: global class  
 **Attribute**: <code>string</code> user - Optional username or some form of identification of the current user  
 **Attribute**: <code>string</code> tokenName - name of the token that will be stored in user's browser (This should not be kept default)  
-<a name="new__createClass_new"></a>
-### new _createClass()
-FireAuth class
-
 <a name="createUserWithEmail"></a>
 ## createUserWithEmail(email, password, callback)
 Creates a new Firebase user with Email and Password Authentication.
