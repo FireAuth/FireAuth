@@ -300,7 +300,7 @@ class FireAuth {
     }
 
     /**
-     * Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Github App.
+     * Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Google App.
      * @function loginWithGoogle
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)

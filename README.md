@@ -59,7 +59,7 @@ fireAuthInstance.createUserWithEmail("email@email.com", "password", function(use
 <dd><p>Logs in a Firebase user with Github Authentication. Make sure your application is configured as a Github App.</p>
 </dd>
 <dt><a href="#loginWithGoogle">loginWithGoogle(redirect, callback)</a></dt>
-<dd><p>Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Github App.</p>
+<dd><p>Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Google App.</p>
 </dd>
 <dt><a href="#logout">logout()</a></dt>
 <dd><p>Logs out a user and removes authentication token.</p>
@@ -180,7 +180,7 @@ Logs in a Firebase user with Github Authentication. Make sure your application i
 
 <a name="loginWithGoogle"></a>
 ## loginWithGoogle(redirect, callback)
-Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Github App.
+Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Google App.
 
 **Kind**: global function  
 
