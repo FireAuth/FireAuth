@@ -1,5 +1,5 @@
 /*
- * Copyright © 2010-2015 Ayush Jain & Rohan Iyer
+ * Copyright © 2015 Ayush Jain & Rohan Iyer
  * Deployment Version 0.0.1 (ECMA5 compiled)
  */
 
