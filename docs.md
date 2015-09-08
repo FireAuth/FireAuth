@@ -25,16 +25,16 @@
 <dd><p>Deletes a Firebase user with Email and Password Authentication.</p>
 </dd>
 <dt><a href="#loginWithFacebook">loginWithFacebook(redirect, callback)</a></dt>
-<dd><p>Logs in a Firebase user with Facebook Authentication. Make sure your application is configured as a Facebook App.</p>
+<dd><p>Logs in a Firebase user with Facebook Authentication. Make sure your application is <a href="https://www.firebase.com/docs/web/guide/login/facebook.html">configured as a Facebook App</a>.</p>
 </dd>
 <dt><a href="#loginWithGithub">loginWithGithub(redirect, callback)</a></dt>
-<dd><p>Logs in a Firebase user with Github Authentication. Make sure your application is configured as a Github App.</p>
+<dd><p>Logs in a Firebase user with GitHub Authentication. Make sure your application is <a href="https://www.firebase.com/docs/web/guide/login/github.html">configured as a GitHub App</a>.</p>
 </dd>
 <dt><a href="#loginWithGoogle">loginWithGoogle(redirect, callback)</a></dt>
-<dd><p>Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Google App.</p>
+<dd><p>Logs in a Firebase user with Google Authentication. Make sure your application is <a href="https://www.firebase.com/docs/web/guide/login/google.html">configured as a Google App</a>.</p>
 </dd>
 <dt><a href="#loginWithTwitter">loginWithTwitter(redirect, callback)</a></dt>
-<dd><p>Logs in a Firebase user with Twitter Authentication. Make sure your application is configured as a Twitter App<a href="https://www.firebase.com/docs/web/guide/login/twitter.html">configured as a Twitter App</a>.</p>
+<dd><p>Logs in a Firebase user with Twitter Authentication. Make sure your application is <a href="https://www.firebase.com/docs/web/guide/login/twitter.html">configured as a Twitter App</a>.</p>
 </dd>
 <dt><a href="#logout">logout()</a></dt>
 <dd><p>Logs out a user and removes authentication token.</p>
@@ -133,7 +133,7 @@ Deletes a Firebase user with Email and Password Authentication.
 
 <a name="loginWithFacebook"></a>
 ## loginWithFacebook(redirect, callback)
-Logs in a Firebase user with Facebook Authentication. Make sure your application is configured as a Facebook App.
+Logs in a Firebase user with Facebook Authentication. Make sure your application is [configured as a Facebook App](https://www.firebase.com/docs/web/guide/login/facebook.html).
 
 **Kind**: global function  
 
@@ -144,18 +144,18 @@ Logs in a Firebase user with Facebook Authentication. Make sure your application
 
 <a name="loginWithGithub"></a>
 ## loginWithGithub(redirect, callback)
-Logs in a Firebase user with Github Authentication. Make sure your application is configured as a Github App.
+Logs in a Firebase user with GitHub Authentication. Make sure your application is [configured as a GitHub App](https://www.firebase.com/docs/web/guide/login/github.html).
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Github. |
+| redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to GitHub. |
 | callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
 <a name="loginWithGoogle"></a>
 ## loginWithGoogle(redirect, callback)
-Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Google App.
+Logs in a Firebase user with Google Authentication. Make sure your application is [configured as a Google App](https://www.firebase.com/docs/web/guide/login/google.html).
 
 **Kind**: global function  
 
@@ -166,7 +166,7 @@ Logs in a Firebase user with Google Authentication. Make sure your application i
 
 <a name="loginWithTwitter"></a>
 ## loginWithTwitter(redirect, callback)
-Logs in a Firebase user with Twitter Authentication. Make sure your application is configured as a Twitter App[configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
+Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
 
 **Kind**: global function  
 

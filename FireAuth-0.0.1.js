@@ -255,7 +255,7 @@ var FireAuth = (function () {
         }
 
         /**
-         * Logs in a Firebase user with Facebook Authentication. Make sure your application is configured as a Facebook App.
+         * Logs in a Firebase user with Facebook Authentication. Make sure your application is [configured as a Facebook App](https://www.firebase.com/docs/web/guide/login/facebook.html).
          * @function loginWithFacebook
          * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook.
          * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
@@ -285,9 +285,9 @@ var FireAuth = (function () {
         }
 
         /**
-         * Logs in a Firebase user with Github Authentication. Make sure your application is configured as a Github App.
+         * Logs in a Firebase user with GitHub Authentication. Make sure your application is [configured as a GitHub App](https://www.firebase.com/docs/web/guide/login/github.html).
          * @function loginWithGithub
-         * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Github.
+         * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to GitHub.
          * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
          */
     }, {
@@ -315,7 +315,7 @@ var FireAuth = (function () {
         }
 
         /**
-         * Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Google App.
+         * Logs in a Firebase user with Google Authentication. Make sure your application is [configured as a Google App](https://www.firebase.com/docs/web/guide/login/google.html).
          * @function loginWithGoogle
          * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
          * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
@@ -345,7 +345,7 @@ var FireAuth = (function () {
         }
 
         /**
-         * Logs in a Firebase user with Twitter Authentication. Make sure your application is configured as a Twitter App[configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
+         * Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
          * @function loginWithTwitter
          * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
          * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
