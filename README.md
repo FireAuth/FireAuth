@@ -1,6 +1,6 @@
 # FireAuth
 
-##### An Open Source JavaScript wrapper for Firebase's native and third-party authentications. 
+##### An Open Source JavaScript wrapper for Firebase's native and third-party authentication. 
 
 ## Usage
 
