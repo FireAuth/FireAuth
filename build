@@ -9,5 +9,9 @@ jsdoc2md FireAuth-0.0.1.js > docs.md
 
 echo "Built documentation."
 
+node documentation.js
+
+echo "Appended documentation."
+
 echo "Build Complete."
 

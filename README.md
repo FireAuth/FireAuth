@@ -143,4 +143,3 @@ Logs in a Firebase user with Facebook Authentication. Make sure your application
 Logs out a user and removes authentication token.
 
 **Kind**: global function  
-
