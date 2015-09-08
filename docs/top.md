@@ -17,12 +17,14 @@ or
 
 ##### In order to use FireAuth, you must enable User Authentication in your Firebase Authentication Settings
 
-##### For Facebook authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/facebook.html) for Facebook.
+## Third Part Authentication Configuration Guides
 
-##### For Github authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/github.html) for Github.
+#####  [Facebook](https://www.firebase.com/docs/web/guide/login/facebook.html)
 
-##### For Google authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/google.html) for Google.
+##### [GitHub](https://www.firebase.com/docs/web/guide/login/github.html)
 
-##### For Twitter authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/twitter.html) for Twitter.
+##### [Google](https://www.firebase.com/docs/web/guide/login/google.html)
+
+##### [Twitter](https://www.firebase.com/docs/web/guide/login/twitter.html)
 
 
