@@ -25,4 +25,8 @@ fireAuthInstance.createUserWithEmail("email@email.com", "password", function(use
 
 ##### For Facebook authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/facebook.html) for Facebook.
 
+##### For Github authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/github.html) for Github.
+
+##### For Google authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/google.html) for Google.
+
 
