@@ -1,11 +1,11 @@
 #!/bin/bash
 # Builds to JS es5 and creates documentation
 
-babel src/FireAuth.js --out-file lib/FireAuth-0.0.1.js
+babel src/FireAuth.js --out-file FireAuth-0.0.1.js
 
 echo "Compiled to es5."
 
-jsdoc2md lib/FireAuth-0.0.1.js > docs/docs.md
+jsdoc2md FireAuth-0.0.1.js > docs/docs.md
 
 echo "Built documentation."
 
