@@ -13,11 +13,11 @@ or
 `<script src="path/to/FireAuth-0.0.1.js"></script>`
 
 #####JS
-`var accountInstance = new AccountJS("https://MYFIREBASEREF.firebaseio.com/");`
+`var fireAuthInstance = new FireAuth("https://MYFIREBASEREF.firebaseio.com/");`
 
 Creating a User
 ```
-accountInstance.createUserWithEmail("email@email.com", "password", function(userData){
+fireAuthInstance.createUserWithEmail("email@email.com", "password", function(userData){
   //Handle user creation  
 })
 ```
