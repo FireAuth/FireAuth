@@ -49,6 +49,12 @@ fireAuthInstance.createUserWithEmail("email@email.com", "password", function(use
 <dt><a href="#loginWithFacebook">loginWithFacebook(redirect, callback)</a></dt>
 <dd><p>Logs in a Firebase user with Facebook Authentication. Make sure your application is configured as a Facebook App.</p>
 </dd>
+<dt><a href="#loginWithGithub">loginWithGithub(redirect, callback)</a></dt>
+<dd><p>Logs in a Firebase user with Github Authentication. Make sure your application is configured as a Github App.</p>
+</dd>
+<dt><a href="#loginWithGoogle">loginWithGoogle(redirect, callback)</a></dt>
+<dd><p>Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Github App.</p>
+</dd>
 <dt><a href="#logout">logout()</a></dt>
 <dd><p>Logs out a user and removes authentication token.</p>
 </dd>
@@ -139,6 +145,28 @@ Logs in a Firebase user with Facebook Authentication. Make sure your application
 | Param | Type | Description |
 | --- | --- | --- |
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook. |
+| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
+
+<a name="loginWithGithub"></a>
+## loginWithGithub(redirect, callback)
+Logs in a Firebase user with Github Authentication. Make sure your application is configured as a Github App.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Github. |
+| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
+
+<a name="loginWithGoogle"></a>
+## loginWithGoogle(redirect, callback)
+Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Github App.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google. |
 | callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
 <a name="logout"></a>

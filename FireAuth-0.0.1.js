@@ -86,8 +86,7 @@ var FireAuth = (function () {
                     console.log("Authenticated successfully with payload:", authData);
                     user = authData.uid;
                     if (token) {
-                        token = authData.token;
-                        localStorage.setItem('TOKEN NAME', token);
+                        localStorage.setItem('TOKEN NAME', authData.token);
                     }
 
                     if (typeof callback == "function") {
@@ -238,11 +237,13 @@ var FireAuth = (function () {
          */
     }, {
         key: 'loginWithFacebook',
-        value: function loginWithFacebook(popup, callback) {
+        value: function loginWithFacebook(redirect, callback) {
             if (redirect) {
                 ref.authWithOAuthRedirect("facebook", function (error) {
                     if (error) {
                         throw "Authentication Failed! " + error;
+                    } else {
+                        localStorage.setItem('TOKEN NAME', authData.token);
                     }
                 });
             } else {
@@ -251,6 +252,73 @@ var FireAuth = (function () {
                         throw "Authentication Failed! " + error;
                     } else {
                         console.log("Authenticated successfully with payload:", authData);
+                        localStorage.setItem('TOKEN NAME', authData.token);
+                        if (typeof callback == "function") {
+                            callback(authData);
+                        }
+                    }
+                });
+            }
+        }
+
+        /**
+         * Logs in a Firebase user with Github Authentication. Make sure your application is configured as a Github App.
+         * @function loginWithGithub
+         * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Github.
+         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+         * @tutorial https://www.firebase.com/docs/web/guide/login/github.html
+         */
+    }, {
+        key: 'loginWithGithub',
+        value: function loginWithGithub(redirect, callback) {
+            if (redirect) {
+                ref.authWithOAuthRedirect("github", function (error) {
+                    if (error) {
+                        throw "Authentication Failed! " + error;
+                    } else {
+                        localStorage.setItem('TOKEN NAME', authData.token);
+                    }
+                });
+            } else {
+                ref.authWithOAuthPopup("github", function (error, authData) {
+                    if (error) {
+                        throw "Authentication Failed! " + error;
+                    } else {
+                        console.log("Authenticated successfully with payload:", authData);
+                        localStorage.setItem('TOKEN NAME', authData.token);
+                        if (typeof callback == "function") {
+                            callback(authData);
+                        }
+                    }
+                });
+            }
+        }
+
+        /**
+         * Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Github App.
+         * @function loginWithGoogle
+         * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
+         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+         * @tutorial https://www.firebase.com/docs/web/guide/login/google.html
+         */
+    }, {
+        key: 'loginWithGoogle',
+        value: function loginWithGoogle(redirect, callback) {
+            if (redirect) {
+                ref.authWithOAuthRedirect("google", function (error) {
+                    if (error) {
+                        throw "Authentication Failed! " + error;
+                    } else {
+                        localStorage.setItem('TOKEN NAME', authData.token);
+                    }
+                });
+            } else {
+                ref.authWithOAuthPopup("google", function (error, authData) {
+                    if (error) {
+                        throw "Authentication Failed! " + error;
+                    } else {
+                        console.log("Authenticated successfully with payload:", authData);
+                        localStorage.setItem('TOKEN NAME', authData.token);
                         if (typeof callback == "function") {
                             callback(authData);
                         }
