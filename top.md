@@ -6,7 +6,7 @@
 
 #####HTML
 
-`<script src="https://filehost.firebaseapp.com/FireAuth/FireAuth-0.0.1.js"></script>`
+`<script src="https://cdn.rawgit.com/FireAuth/FireAuth/master/FireAuth-0.0.1.js"></script>`
 
 or
 
