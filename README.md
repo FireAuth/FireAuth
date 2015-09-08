@@ -52,6 +52,9 @@ fireAuthInstance.createUserWithEmail("email@email.com", "password", function(use
 <dt><a href="#logout">logout()</a></dt>
 <dd><p>Logs out a user and removes authentication token.</p>
 </dd>
+<dt><a href="#checkAuthChanges">checkAuthChanges(loggedIn, loggedOut)</a></dt>
+<dd><p>Event handler checks any changes in user authentication</p>
+</dd>
 </dl>
 <a name="createUserWithEmail"></a>
 ## createUserWithEmail(email, password, callback)
@@ -143,6 +146,17 @@ Logs in a Firebase user with Facebook Authentication. Make sure your application
 Logs out a user and removes authentication token.
 
 **Kind**: global function  
+<a name="checkAuthChanges"></a>
+## checkAuthChanges(loggedIn, loggedOut)
+Event handler checks any changes in user authentication
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| loggedIn | <code>function</code> | A function that will get called if the user becomes authenticated or is already logged in. |
+| loggedOut | <code>function</code> | A function that will get called if the user becomes unauthenticated or is already logged out. |
+
 
 
 ##### Created by Ayush Jain and Rohan Iyer 

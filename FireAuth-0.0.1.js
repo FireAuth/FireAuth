@@ -270,16 +270,23 @@ var FireAuth = (function () {
             localStorage.removeItem('TOKEN NAME');
         }
 
-        //event handler checks any changes in user authentication
+        /**
+         * Event handler checks any changes in user authentication
+         * @function checkAuthChanges
+         * @param {Function} loggedIn - A function that will get called if the user becomes authenticated or is already logged in.
+         * @param {Function} loggedOut - A function that will get called if the user becomes unauthenticated or is already logged out.
+         */
     }, {
         key: 'checkAuthChanges',
-        value: function checkAuthChanges() {
+        value: function checkAuthChanges(loggedIn, loggedOut) {
             ref.onAuth(function () {
                 if (ref.getAuth() == null) {
                     //not logged in
+                    loggedOut();
                 } else {
-                        //logged in
-                    }
+                    //logged in
+                    loggedIn();
+                }
             });
         }
 

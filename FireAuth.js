@@ -16,7 +16,7 @@ class FireAuth {
         this.ref = new Firebase(firebaseURL);
         this.user = '';
         this.token = localStorage.getItem('TOKEN NAME');
-        
+
         if(token == null){
           token = "No Token";
         }
@@ -55,7 +55,7 @@ class FireAuth {
             }
         });
     }
-  
+
     /**
      * Logs in a Firebase user with Email and Password Authentication.
      * @function loginWithEmail
@@ -78,7 +78,7 @@ class FireAuth {
                     token = authData.token;
                     localStorage.setItem('TOKEN NAME', token);
                 }
-                
+
                 if(typeof callback == "function"){
                     callback(authData);
                 }
@@ -167,7 +167,7 @@ class FireAuth {
                     case "INVALID_USER":
                         throw "The specified user account does not exist.";
                         break;
- 
+
                     default:
                         throw "Error resetting password: " + error;
                 }
@@ -247,13 +247,21 @@ class FireAuth {
         localStorage.removeItem('TOKEN NAME');
     }
 
-    //event handler checks any changes in user authentication
-    checkAuthChanges(){
+
+    /**
+     * Event handler checks any changes in user authentication
+     * @function checkAuthChanges
+     * @param {Function} loggedIn - A function that will get called if the user becomes authenticated or is already logged in.
+     * @param {Function} loggedOut - A function that will get called if the user becomes unauthenticated or is already logged out.
+     */
+    checkAuthChanges(loggedIn, loggedOut){
         ref.onAuth(function(){
             if(ref.getAuth() == null){
                 //not logged in
+                loggedOut();
             }else{
                 //logged in
+                loggedIn();
             }
         });
     }
@@ -265,13 +273,3 @@ class FireAuth {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
