@@ -224,7 +224,7 @@ class FireAuth {
      * @function loginWithFacebook
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
-     * @tutorial https://www.firebase.com/docs/web/guide/login/facebook.html
+     * @tutorial {String} Docs - https://www.firebase.com/docs/web/guide/login/facebook.html |||||||||||||||||||BROKEN||||||||||||||||||||||
      */
     loginWithFacebook(redirect, callback){
         if(redirect){
@@ -256,7 +256,7 @@ class FireAuth {
      * @function loginWithGithub
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Github.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
-     * @tutorial https://www.firebase.com/docs/web/guide/login/github.html
+     * @tutorial https://www.firebase.com/docs/web/guide/login/github.html |||||||||||||||||||BROKEN||||||||||||||||||||||
      */
     loginWithGithub(redirect, callback){
         if(redirect){
@@ -287,7 +287,7 @@ class FireAuth {
      * @function loginWithGoogle
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
-     * @tutorial https://www.firebase.com/docs/web/guide/login/google.html
+     * @tutorial https://www.firebase.com/docs/web/guide/login/google.html |||||||||||||||||||BROKEN||||||||||||||||||||||
      */
     loginWithGoogle(redirect, callback){
         if(redirect){
