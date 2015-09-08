@@ -326,6 +326,10 @@ class FireAuth {
      * @function loginWithTwitter
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+     * @example
+     * fireAuthInstance.loginWithTwitter(false, function(authData){
+     *      //The authentication was successful and opened within a popup.
+     * })
      */
     loginWithTwitter(redirect, callback){
         if(redirect){
@@ -360,18 +364,24 @@ class FireAuth {
 
     /**
      * Event handler checks any changes in user authentication
-     * @function checkAuthChanges
-     * @param {Function} loggedIn - A function that will get called if the user becomes authenticated or is already logged in.
-     * @param {Function} loggedOut - A function that will get called if the user becomes unauthenticated or is already logged out.
+     * @function authChangeListener
+     * @param {Function} onLogin - A function that will get called if the user becomes authenticated or is already logged in.
+     * @param {Function} onLogout - A function that will get called if the user becomes unauthenticated or is already logged out.
+     * @example
+     * fireAuthInstance.authChangeListener(function(){
+     *      console.log("The user has logged in.")
+     * }, function(){
+     *       console.log("The user has logged out.")
+     * })
      */
-    checkAuthChanges(loggedIn, loggedOut){
+    authChangeListener(onLogin, onLogout){
         ref.onAuth(function(){
             if(ref.getAuth() == null){
                 //not logged in
-                loggedOut();
+                onLogin();
             }else{
                 //logged in
-                loggedIn();
+                onLogout();
             }
         });
     }

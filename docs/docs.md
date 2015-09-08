@@ -39,7 +39,7 @@
 <dt><a href="#logout">logout()</a></dt>
 <dd><p>Logs out a user and removes authentication token.</p>
 </dd>
-<dt><a href="#checkAuthChanges">checkAuthChanges(loggedIn, loggedOut)</a></dt>
+<dt><a href="#authChangeListener">authChangeListener(onLogin, onLogout)</a></dt>
 <dd><p>Event handler checks any changes in user authentication</p>
 </dd>
 </dl>
@@ -175,19 +175,33 @@ Logs in a Firebase user with Twitter Authentication. Make sure your application 
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter. |
 | callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
+**Example**  
+```js
+fireAuthInstance.loginWithTwitter(false, function(authData){
+     //The authentication was successful and opened within a popup.
+})
+```
 <a name="logout"></a>
 ## logout()
 Logs out a user and removes authentication token.
 
 **Kind**: global function  
-<a name="checkAuthChanges"></a>
-## checkAuthChanges(loggedIn, loggedOut)
+<a name="authChangeListener"></a>
+## authChangeListener(onLogin, onLogout)
 Event handler checks any changes in user authentication
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| loggedIn | <code>function</code> | A function that will get called if the user becomes authenticated or is already logged in. |
-| loggedOut | <code>function</code> | A function that will get called if the user becomes unauthenticated or is already logged out. |
+| onLogin | <code>function</code> | A function that will get called if the user becomes authenticated or is already logged in. |
+| onLogout | <code>function</code> | A function that will get called if the user becomes unauthenticated or is already logged out. |
 
+**Example**  
+```js
+fireAuthInstance.authChangeListener(function(){
+     console.log("The user has logged in.")
+}, function(){
+      console.log("The user has logged out.")
+})
+```
