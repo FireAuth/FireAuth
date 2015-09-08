@@ -1,12 +1,12 @@
 # FireAuth
 
-##### An Open Source JavaScript wrapper for Firebase's native and third-party authentications. 
+##### An Open Source JavaScript wrapper for Firebase's native and third-party authentication. 
 
 ## Usage
 
 #####HTML
 
-`<script src="https://cdn.rawgit.com/FireAuth/FireAuth/master/FireAuth-0.0.1.js"></script>`
+`<script src="https://rawgit.com/FireAuth/FireAuth/master/FireAuth-0.0.1.js"></script>`
 
 or
 
