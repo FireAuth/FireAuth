@@ -142,5 +142,8 @@ Logs in a Firebase user with Facebook Authentication. Make sure your application
 ## logout()
 Logs out a user and removes authentication token.
 
-**Kind**: global function  
+**Kind**: global function 
+
+
+##### Created by Ayush Jain and Rohan Iyer 
 
