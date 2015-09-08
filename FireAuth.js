@@ -9,6 +9,8 @@
  * @class FireAuth
  * @attribute {string} user - Optional username or some form of identification of the current user
  * @attribute {string} tokenName - name of the token that will be stored in user's browser (This should not be kept default)
+ * @constructor
+ * @param {string} firebaseURL - The URL of the Firebase reference.
  */
 
 class FireAuth {

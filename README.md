@@ -28,8 +28,9 @@ fireAuthInstance.createUserWithEmail("email@email.com", "password", function(use
 
 ## Classes
 <dl>
-<dt><a href="#FireAuth">FireAuth</a></dt>
-<dd></dd>
+<dt><a href="#_createClass">_createClass</a></dt>
+<dd><p>FireAuth</p>
+</dd>
 </dl>
 ## Functions
 <dl>
@@ -67,11 +68,20 @@ fireAuthInstance.createUserWithEmail("email@email.com", "password", function(use
 <dd><p>Event handler checks any changes in user authentication</p>
 </dd>
 </dl>
-<a name="FireAuth"></a>
-## FireAuth
+<a name="_createClass"></a>
+## _createClass
+FireAuth
+
 **Kind**: global class  
 **Attribute**: <code>string</code> user - Optional username or some form of identification of the current user  
 **Attribute**: <code>string</code> tokenName - name of the token that will be stored in user's browser (This should not be kept default)  
+<a name="new__createClass_new"></a>
+### new _createClass(firebaseURL)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| firebaseURL | <code>string</code> | The URL of the Firebase reference. |
+
 <a name="createUserWithEmail"></a>
 ## createUserWithEmail(email, password, callback)
 Creates a new Firebase user with Email and Password Authentication.
