@@ -48,7 +48,6 @@
 FireAuth
 
 **Kind**: global class  
-**Attribute**: <code>string</code> user - Optional username or some form of identification of the current user  
 **Attribute**: <code>string</code> tokenName - name of the token that will be stored in user's browser (This should not be kept default)  
 <a name="new_FireAuth_new"></a>
 ### new FireAuth(firebaseURL)
@@ -69,6 +68,13 @@ Creates a new Firebase user with Email and Password Authentication.
 | password | <code>string</code> | The user's password |
 | callback | <code>function</code> | Optional callback function with parameter userData. (Called upon successful account creation) |
 
+**Example**  
+```js
+fireAuthInstance.createUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(userData){
+     // The user creation was successful
+     doStuffWith(userData);
+})
+```
 <a name="loginWithEmail"></a>
 ## loginWithEmail(email, password, token, callback)
 Logs in a Firebase user with Email and Password Authentication.
@@ -82,6 +88,13 @@ Logs in a Firebase user with Email and Password Authentication.
 | token | <code>boolean</code> | True to create an auth token, false to not create one. |
 | callback | <code>function</code> | Optional callback function with parameter authData. (Called upon successful login) |
 
+**Example**  
+```js
+fireAuthInstance.loginWithEmail("john@doe.com", "correcthorsebatterystaple", false, function(authData){
+     // The authentication was successful.
+     doStuffWith(authData);
+})
+```
 <a name="changeUserPassword"></a>
 ## changeUserPassword(email, oldPassword, newPassword, callback)
 Changes a Firebase user's password.
@@ -95,6 +108,12 @@ Changes a Firebase user's password.
 | newPassword | <code>string</code> | The user's new password |
 | callback | <code>function</code> | Optional callback function. (Called upon successful password change) |
 
+**Example**  
+```js
+fireAuthInstance.changeUserPassword("john@doe.com", "correcthorsebatterystaple", "youwillneverguessthis", function(){
+     // Password has been changed - handle anything else here.
+})
+```
 <a name="changeUserEmail"></a>
 ## changeUserEmail(oldEmail, newEmail, password, callback)
 Changes a Firebase user's email.
@@ -108,6 +127,12 @@ Changes a Firebase user's email.
 | password | <code>string</code> | The user's password |
 | callback | <code>function</code> | Optional callback function. (Called upon successful email change) |
 
+**Example**  
+```js
+fireAuthInstance.changeUserEmail("john@doe.com", "jane@doe.com", "correcthorsebatterystaple", function(){
+     // Email has been changed - handle anything else here.
+})
+```
 <a name="resetUserPassword"></a>
 ## resetUserPassword(email, callback)
 Sends a reset password email to the user.
@@ -119,6 +144,12 @@ Sends a reset password email to the user.
 | email | <code>string</code> | The user's email |
 | callback | <code>function</code> | Optional callback function. (Called once reset email is sent) |
 
+**Example**  
+```js
+fireAuthInstance.resetUserPassword("john@doe.com", function(){
+     // Email has been sent - handle anything else here.
+})
+```
 <a name="deleteUserWithEmail"></a>
 ## deleteUserWithEmail(email, password, callback)
 Deletes a Firebase user with Email and Password Authentication.
@@ -131,6 +162,12 @@ Deletes a Firebase user with Email and Password Authentication.
 | password | <code>string</code> | The user's password |
 | callback | <code>function</code> | Optional callback function. (Called upon successful account deletion) |
 
+**Example**  
+```js
+fireAuthInstance.deleteUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(){
+     // Successfully deleted user within Firebase - Handle anything else here.
+})
+```
 <a name="loginWithFacebook"></a>
 ## loginWithFacebook(redirect, callback)
 Logs in a Firebase user with Facebook Authentication. Make sure your application is [configured as a Facebook App](https://www.firebase.com/docs/web/guide/login/facebook.html).
@@ -142,6 +179,13 @@ Logs in a Firebase user with Facebook Authentication. Make sure your application
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook. |
 | callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
+**Example**  
+```js
+fireAuthInstance.loginWithFacebook(false, function(authData){
+     // The authentication was successful and opened within a popup.
+     doStuffWith(authData);
+});
+```
 <a name="loginWithGithub"></a>
 ## loginWithGithub(redirect, callback)
 Logs in a Firebase user with GitHub Authentication. Make sure your application is [configured as a GitHub App](https://www.firebase.com/docs/web/guide/login/github.html).
@@ -153,6 +197,13 @@ Logs in a Firebase user with GitHub Authentication. Make sure your application i
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to GitHub. |
 | callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
+**Example**  
+```js
+fireAuthInstance.loginWithGithub(false, function(authData){
+     // The authentication was successful and opened within a popup.
+     doStuffWith(authData);
+});
+```
 <a name="loginWithGoogle"></a>
 ## loginWithGoogle(redirect, callback)
 Logs in a Firebase user with Google Authentication. Make sure your application is [configured as a Google App](https://www.firebase.com/docs/web/guide/login/google.html).
@@ -164,6 +215,13 @@ Logs in a Firebase user with Google Authentication. Make sure your application i
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google. |
 | callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
+**Example**  
+```js
+fireAuthInstance.loginWithGoogle(false, function(authData){
+     // The authentication was successful and opened within a popup.
+     doStuffWith(authData);
+}); 
+```
 <a name="loginWithTwitter"></a>
 ## loginWithTwitter(redirect, callback)
 Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
@@ -178,8 +236,9 @@ Logs in a Firebase user with Twitter Authentication. Make sure your application 
 **Example**  
 ```js
 fireAuthInstance.loginWithTwitter(false, function(authData){
-     //The authentication was successful and opened within a popup.
-})
+     // The authentication was successful and opened within a popup.
+     doStuffWith(authData);
+});
 ```
 <a name="logout"></a>
 ## logout()

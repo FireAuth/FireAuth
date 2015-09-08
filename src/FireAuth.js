@@ -24,7 +24,6 @@
 
 /**
  * @class FireAuth
- * @attribute {string} user - Optional username or some form of identification of the current user
  * @attribute {string} tokenName - name of the token that will be stored in user's browser (This should not be kept default)
  * @constructor FireAuth
  * @param {string} firebaseURL - The URL of the Firebase reference.
@@ -40,7 +39,6 @@ class FireAuth {
     constructor(firebaseURL){
 
         this.ref = new Firebase(firebaseURL);
-        this.user = '';
         this.tokenName = this.tokenName;
         this.token = localStorage.getItem(this.tokenName);
 
@@ -53,7 +51,6 @@ class FireAuth {
                 console.log("No pre-existing token found");
             } else {
                 console.log("Pre-existing token found");
-                user = result.uid;
             }
         });
     }
@@ -64,6 +61,11 @@ class FireAuth {
      * @param  {string} email - The user's email
      * @param  {string} password - The user's password
      * @param  {Function} callback - Optional callback function with parameter userData. (Called upon successful account creation)
+     * @example
+     * fireAuthInstance.createUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(userData){
+     *      // The user creation was successful
+     *      doStuffWith(userData);
+     * })
      */
     createUserWithEmail(email, password, callback){
         ref.createUser({
@@ -90,6 +92,11 @@ class FireAuth {
      * @param  {string} password - The user's password
      * @param  {boolean} token - True to create an auth token, false to not create one.
      * @param  {function} callback - Optional callback function with parameter authData. (Called upon successful login)
+     * @example
+     * fireAuthInstance.loginWithEmail("john@doe.com", "correcthorsebatterystaple", false, function(authData){
+     *      // The authentication was successful.
+     *      doStuffWith(authData);
+     * })
      */
     loginWithEmail(email, password, token, callback){
         ref.authWithPassword({
@@ -100,7 +107,6 @@ class FireAuth {
                 throw "Authentication Failed! " + error;
             } else {
                 console.log("Authenticated successfully with payload:", authData);
-                user = authData.uid;
                 if(token){
                     localStorage.setItem(this.tokenName, authData.token);
                 }
@@ -119,6 +125,10 @@ class FireAuth {
      * @param  {string} oldPassword - The user's original password
      * @param  {string} newPassword - The user's new password
      * @param  {Function} callback - Optional callback function. (Called upon successful password change)
+     * @example
+     * fireAuthInstance.changeUserPassword("john@doe.com", "correcthorsebatterystaple", "youwillneverguessthis", function(){
+     *      // Password has been changed - handle anything else here.
+     * })
      */
     changeUserPassword(email, oldPassword, newPassword, callback){
         ref.changePassword({
@@ -151,6 +161,10 @@ class FireAuth {
      * @param  {string} newEmail - The user's new email
      * @param  {string} password - The user's password
      * @param  {Function} callback - Optional callback function. (Called upon successful email change)
+     * @example
+     * fireAuthInstance.changeUserEmail("john@doe.com", "jane@doe.com", "correcthorsebatterystaple", function(){
+     *      // Email has been changed - handle anything else here.
+     * })
      */
     changeUserEmail(oldEmail, newEmail, password, callback){
         ref.changeEmail({
@@ -181,6 +195,10 @@ class FireAuth {
      * @function resetUserPassword
      * @param  {string} email - The user's email
      * @param  {Function} callback - Optional callback function. (Called once reset email is sent)
+     * @example
+     * fireAuthInstance.resetUserPassword("john@doe.com", function(){
+     *      // Email has been sent - handle anything else here.
+     * })
      */
     resetUserPassword(email, callback){
         ref.changeEmail({
@@ -210,6 +228,10 @@ class FireAuth {
      * @param  {string} email - The user's email
      * @param  {string} password - The user's password
      * @param  {Function} callback - Optional callback function. (Called upon successful account deletion)
+     * @example
+     * fireAuthInstance.deleteUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(){
+     *      // Successfully deleted user within Firebase - Handle anything else here.
+     * })
      */
     deleteUserWithEmail(email, password, callback){
         ref.removeUser({
@@ -241,6 +263,11 @@ class FireAuth {
      * @function loginWithFacebook
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+     * @example
+     * fireAuthInstance.loginWithFacebook(false, function(authData){
+     *      // The authentication was successful and opened within a popup.
+     *      doStuffWith(authData);
+     * });
      */
     loginWithFacebook(redirect, callback){
         if(redirect){
@@ -270,13 +297,18 @@ class FireAuth {
      * @function loginWithGithub
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to GitHub.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+     * @example
+     * fireAuthInstance.loginWithGithub(false, function(authData){
+     *      // The authentication was successful and opened within a popup.
+     *      doStuffWith(authData);
+     * });
      */
     loginWithGithub(redirect, callback){
         if(redirect){
             ref.authWithOAuthRedirect("github", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
-                }s
+                }
             })
         }else{
             ref.authWithOAuthPopup("github", function(error, authData){
@@ -298,6 +330,11 @@ class FireAuth {
      * @function loginWithGoogle
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+     * @example
+     * fireAuthInstance.loginWithGoogle(false, function(authData){
+     *      // The authentication was successful and opened within a popup.
+     *      doStuffWith(authData);
+     * }); 
      */
     loginWithGoogle(redirect, callback){
         if(redirect){
@@ -328,8 +365,9 @@ class FireAuth {
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @example
      * fireAuthInstance.loginWithTwitter(false, function(authData){
-     *      //The authentication was successful and opened within a popup.
-     * })
+     *      // The authentication was successful and opened within a popup.
+     *      doStuffWith(authData);
+     * });
      */
     loginWithTwitter(redirect, callback){
         if(redirect){
