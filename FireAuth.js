@@ -5,6 +5,13 @@
 
 "use strict";
 
+/**
+ * FireAuth class
+ * @class
+ * @attribute {string} user - Optional username or some form of identification of the current user
+ * @attribute {string} tokenName - name of the token that will be stored in user's browser (This should not be kept default)
+ */
+
 class FireAuth {
 
     /**
@@ -13,9 +20,11 @@ class FireAuth {
      * @param {string} firebaseURL - The URL of the Firebase reference.
      */
     constructor(firebaseURL){
+
         this.ref = new Firebase(firebaseURL);
         this.user = '';
-        this.token = localStorage.getItem('TOKEN NAME');
+        this.tokenName = this.tokenName;
+        this.token = localStorage.getItem(this.tokenName);
 
         if(token == null){
           token = "No Token";
@@ -75,7 +84,7 @@ class FireAuth {
                 console.log("Authenticated successfully with payload:", authData);
                 user = authData.uid;
                 if(token){
-                    localStorage.setItem('TOKEN NAME', authData.token);
+                    localStorage.setItem(this.tokenName, authData.token);
                 }
 
                 if(typeof callback == "function"){
@@ -222,7 +231,7 @@ class FireAuth {
                 if(error){
                     throw "Authentication Failed! " + error;
                 }else{
-                    localStorage.setItem('TOKEN NAME', authData.token);
+                    localStorage.setItem(this.tokenName, authData.token);
                 }
             })
         }else{
@@ -231,7 +240,7 @@ class FireAuth {
                     throw "Authentication Failed! " + error;
                 }else{
                     console.log("Authenticated successfully with payload:", authData);
-                    localStorage.setItem('TOKEN NAME', authData.token);
+                    localStorage.setItem(this.tokenName, authData.token);
                     if(typeof callback == "function"){
                         callback(authData);
                     }
@@ -254,7 +263,7 @@ class FireAuth {
                 if(error){
                     throw "Authentication Failed! " + error;
                 }else{
-                    localStorage.setItem('TOKEN NAME', authData.token);
+                    localStorage.setItem(this.tokenName, authData.token);
                 }
             })
         }else{
@@ -263,7 +272,7 @@ class FireAuth {
                     throw "Authentication Failed! " + error;
                 }else{
                     console.log("Authenticated successfully with payload:", authData);
-                    localStorage.setItem('TOKEN NAME', authData.token);
+                    localStorage.setItem(this.tokenName, authData.token);
                     if(typeof callback == "function"){
                         callback(authData);
                     }
@@ -285,7 +294,7 @@ class FireAuth {
                 if(error){
                     throw "Authentication Failed! " + error;
                 }else{
-                    localStorage.setItem('TOKEN NAME', authData.token);
+                    localStorage.setItem(this.tokenName, authData.token);
                 }
             })
         }else{
@@ -294,7 +303,7 @@ class FireAuth {
                     throw "Authentication Failed! " + error;
                 }else{
                     console.log("Authenticated successfully with payload:", authData);
-                    localStorage.setItem('TOKEN NAME', authData.token);
+                    localStorage.setItem(this.tokenName, authData.token);
                     if(typeof callback == "function"){
                         callback(authData);
                     }
@@ -309,7 +318,7 @@ class FireAuth {
      */
     logout(){
         ref.unauth();
-        localStorage.removeItem('TOKEN NAME');
+        localStorage.removeItem(this.tokenName);
     }
 
 

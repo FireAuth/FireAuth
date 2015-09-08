@@ -5,9 +5,16 @@
 
 "use strict";
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+/**
+ * FireAuth class
+ * @class
+ * @attribute {string} user - Optional username or some form of identification of the current user
+ * @attribute {string} tokenName - name of the token that will be stored in user's browser (This should not be kept default)
+ */
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var FireAuth = (function () {
 
@@ -22,7 +29,8 @@ var FireAuth = (function () {
 
         this.ref = new Firebase(firebaseURL);
         this.user = '';
-        this.token = localStorage.getItem('TOKEN NAME');
+        this.tokenName = this.tokenName;
+        this.token = localStorage.getItem(this.tokenName);
 
         if (token == null) {
             token = "No Token";
@@ -47,7 +55,7 @@ var FireAuth = (function () {
      */
 
     _createClass(FireAuth, [{
-        key: 'createUserWithEmail',
+        key: "createUserWithEmail",
         value: function createUserWithEmail(email, password, callback) {
             ref.createUser({
                 email: email,
@@ -74,7 +82,7 @@ var FireAuth = (function () {
          * @param  {function} callback - Optional callback function with parameter authData. (Called upon successful login)
          */
     }, {
-        key: 'loginWithEmail',
+        key: "loginWithEmail",
         value: function loginWithEmail(email, password, token, callback) {
             ref.authWithPassword({
                 email: email,
@@ -86,7 +94,7 @@ var FireAuth = (function () {
                     console.log("Authenticated successfully with payload:", authData);
                     user = authData.uid;
                     if (token) {
-                        localStorage.setItem('TOKEN NAME', authData.token);
+                        localStorage.setItem(this.tokenName, authData.token);
                     }
 
                     if (typeof callback == "function") {
@@ -105,7 +113,7 @@ var FireAuth = (function () {
          * @param  {Function} callback - Optional callback function. (Called upon successful password change)
          */
     }, {
-        key: 'changeUserPassword',
+        key: "changeUserPassword",
         value: function changeUserPassword(email, oldPassword, newPassword, callback) {
             ref.changePassword({
                 email: email,
@@ -139,7 +147,7 @@ var FireAuth = (function () {
          * @param  {Function} callback - Optional callback function. (Called upon successful email change)
          */
     }, {
-        key: 'changeUserEmail',
+        key: "changeUserEmail",
         value: function changeUserEmail(oldEmail, newEmail, password, callback) {
             ref.changeEmail({
                 email: email,
@@ -171,7 +179,7 @@ var FireAuth = (function () {
          * @param  {Function} callback - Optional callback function. (Called once reset email is sent)
          */
     }, {
-        key: 'resetUserPassword',
+        key: "resetUserPassword",
         value: function resetUserPassword(email, callback) {
             ref.changeEmail({
                 email: email,
@@ -202,7 +210,7 @@ var FireAuth = (function () {
          * @param  {Function} callback - Optional callback function. (Called upon successful account deletion)
          */
     }, {
-        key: 'deleteUserWithEmail',
+        key: "deleteUserWithEmail",
         value: function deleteUserWithEmail(email, password, callback) {
             ref.removeUser({
                 email: email,
@@ -236,14 +244,14 @@ var FireAuth = (function () {
          * @tutorial https://www.firebase.com/docs/web/guide/login/facebook.html
          */
     }, {
-        key: 'loginWithFacebook',
+        key: "loginWithFacebook",
         value: function loginWithFacebook(redirect, callback) {
             if (redirect) {
                 ref.authWithOAuthRedirect("facebook", function (error) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     } else {
-                        localStorage.setItem('TOKEN NAME', authData.token);
+                        localStorage.setItem(this.tokenName, authData.token);
                     }
                 });
             } else {
@@ -252,7 +260,7 @@ var FireAuth = (function () {
                         throw "Authentication Failed! " + error;
                     } else {
                         console.log("Authenticated successfully with payload:", authData);
-                        localStorage.setItem('TOKEN NAME', authData.token);
+                        localStorage.setItem(this.tokenName, authData.token);
                         if (typeof callback == "function") {
                             callback(authData);
                         }
@@ -269,14 +277,14 @@ var FireAuth = (function () {
          * @tutorial https://www.firebase.com/docs/web/guide/login/github.html
          */
     }, {
-        key: 'loginWithGithub',
+        key: "loginWithGithub",
         value: function loginWithGithub(redirect, callback) {
             if (redirect) {
                 ref.authWithOAuthRedirect("github", function (error) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     } else {
-                        localStorage.setItem('TOKEN NAME', authData.token);
+                        localStorage.setItem(this.tokenName, authData.token);
                     }
                 });
             } else {
@@ -285,7 +293,7 @@ var FireAuth = (function () {
                         throw "Authentication Failed! " + error;
                     } else {
                         console.log("Authenticated successfully with payload:", authData);
-                        localStorage.setItem('TOKEN NAME', authData.token);
+                        localStorage.setItem(this.tokenName, authData.token);
                         if (typeof callback == "function") {
                             callback(authData);
                         }
@@ -302,14 +310,14 @@ var FireAuth = (function () {
          * @tutorial https://www.firebase.com/docs/web/guide/login/google.html
          */
     }, {
-        key: 'loginWithGoogle',
+        key: "loginWithGoogle",
         value: function loginWithGoogle(redirect, callback) {
             if (redirect) {
                 ref.authWithOAuthRedirect("google", function (error) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     } else {
-                        localStorage.setItem('TOKEN NAME', authData.token);
+                        localStorage.setItem(this.tokenName, authData.token);
                     }
                 });
             } else {
@@ -318,7 +326,7 @@ var FireAuth = (function () {
                         throw "Authentication Failed! " + error;
                     } else {
                         console.log("Authenticated successfully with payload:", authData);
-                        localStorage.setItem('TOKEN NAME', authData.token);
+                        localStorage.setItem(this.tokenName, authData.token);
                         if (typeof callback == "function") {
                             callback(authData);
                         }
@@ -332,10 +340,10 @@ var FireAuth = (function () {
          * @function logout
          */
     }, {
-        key: 'logout',
+        key: "logout",
         value: function logout() {
             ref.unauth();
-            localStorage.removeItem('TOKEN NAME');
+            localStorage.removeItem(this.tokenName);
         }
 
         /**
@@ -345,7 +353,7 @@ var FireAuth = (function () {
          * @param {Function} loggedOut - A function that will get called if the user becomes unauthenticated or is already logged out.
          */
     }, {
-        key: 'checkAuthChanges',
+        key: "checkAuthChanges",
         value: function checkAuthChanges(loggedIn, loggedOut) {
             ref.onAuth(function () {
                 if (ref.getAuth() == null) {
@@ -360,7 +368,7 @@ var FireAuth = (function () {
 
         //regex to check if the text is an email
     }, {
-        key: 'checkIfEmailInString',
+        key: "checkIfEmailInString",
         value: function checkIfEmailInString(text) {
             var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
             return re.test(text);
