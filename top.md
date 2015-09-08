@@ -29,4 +29,6 @@ fireAuthInstance.createUserWithEmail("email@email.com", "password", function(use
 
 ##### For Google authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/google.html) for Google.
 
+##### For Twitter authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/twitter.html) for Twitter.
+
 

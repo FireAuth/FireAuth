@@ -29,6 +29,8 @@ fireAuthInstance.createUserWithEmail("email@email.com", "password", function(use
 
 ##### For Google authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/google.html) for Google.
 
+##### For Twitter authentication, you must [configure your application](https://www.firebase.com/docs/web/guide/login/twitter.html) for Twitter.
+
 
 ## Classes
 <dl>
@@ -64,6 +66,9 @@ fireAuthInstance.createUserWithEmail("email@email.com", "password", function(use
 </dd>
 <dt><a href="#loginWithGoogle">loginWithGoogle(redirect, callback)</a></dt>
 <dd><p>Logs in a Firebase user with Google Authentication. Make sure your application is configured as a Google App.</p>
+</dd>
+<dt><a href="#loginWithTwitter">loginWithTwitter(redirect, callback)</a></dt>
+<dd><p>Logs in a Firebase user with Twitter Authentication. Make sure your application is configured as a Twitter App<a href="https://www.firebase.com/docs/web/guide/login/twitter.html">configured as a Twitter App</a>.</p>
 </dd>
 <dt><a href="#logout">logout()</a></dt>
 <dd><p>Logs out a user and removes authentication token.</p>
@@ -191,6 +196,17 @@ Logs in a Firebase user with Google Authentication. Make sure your application i
 | Param | Type | Description |
 | --- | --- | --- |
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google. |
+| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
+
+<a name="loginWithTwitter"></a>
+## loginWithTwitter(redirect, callback)
+Logs in a Firebase user with Twitter Authentication. Make sure your application is configured as a Twitter App[configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter. |
 | callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
 <a name="logout"></a>

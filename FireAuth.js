@@ -241,15 +241,12 @@ class FireAuth {
      * @function loginWithFacebook
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
-     * @tutorial {String} Docs - https://www.firebase.com/docs/web/guide/login/facebook.html |||||||||||||||||||BROKEN||||||||||||||||||||||
      */
     loginWithFacebook(redirect, callback){
         if(redirect){
             ref.authWithOAuthRedirect("facebook", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
-                }else{
-                    localStorage.setItem(this.tokenName, authData.token);
                 }
             })
         }else{
@@ -273,16 +270,13 @@ class FireAuth {
      * @function loginWithGithub
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Github.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
-     * @tutorial https://www.firebase.com/docs/web/guide/login/github.html |||||||||||||||||||BROKEN||||||||||||||||||||||
      */
     loginWithGithub(redirect, callback){
         if(redirect){
             ref.authWithOAuthRedirect("github", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
-                }else{
-                    localStorage.setItem(this.tokenName, authData.token);
-                }
+                }s
             })
         }else{
             ref.authWithOAuthPopup("github", function(error, authData){
@@ -304,19 +298,44 @@ class FireAuth {
      * @function loginWithGoogle
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
-     * @tutorial https://www.firebase.com/docs/web/guide/login/google.html |||||||||||||||||||BROKEN||||||||||||||||||||||
      */
     loginWithGoogle(redirect, callback){
         if(redirect){
             ref.authWithOAuthRedirect("google", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
-                }else{
-                    localStorage.setItem(this.tokenName, authData.token);
                 }
             })
         }else{
             ref.authWithOAuthPopup("google", function(error, authData){
+                if(error){
+                    throw "Authentication Failed! " + error;
+                }else{
+                    console.log("Authenticated successfully with payload:", authData);
+                    localStorage.setItem(this.tokenName, authData.token);
+                    if(typeof callback == "function"){
+                        callback(authData);
+                    }
+                }
+            })
+        }
+    }
+
+    /**
+     * Logs in a Firebase user with Twitter Authentication. Make sure your application is configured as a Twitter App[configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
+     * @function loginWithTwitter
+     * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
+     * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+     */
+    loginWithTwitter(redirect, callback){
+        if(redirect){
+            ref.authWithOAuthRedirect("twitter", function(error){
+                if(error){
+                    throw "Authentication Failed! " + error;
+                }
+            })
+        }else{
+            ref.authWithOAuthPopup("twitter", function(error, authData){
                 if(error){
                     throw "Authentication Failed! " + error;
                 }else{
@@ -338,7 +357,6 @@ class FireAuth {
         ref.unauth();
         localStorage.removeItem(this.tokenName);
     }
-
 
     /**
      * Event handler checks any changes in user authentication
