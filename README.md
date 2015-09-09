@@ -70,7 +70,7 @@ or
 <dd><p>Logs out a user and removes authentication token.</p>
 </dd>
 <dt><a href="#authChangeListener">authChangeListener(onLogin, onLogout)</a></dt>
-<dd><p>Event handler checks any changes in user authentication</p>
+<dd><p>Event handler checks any changes in user authentication (Possible alternative to using callbacks from other methods)</p>
 </dd>
 <dt><a href="#setTokenName">setTokenName(newTokenName)</a></dt>
 <dd><p>Sets the token id or name.</p>
@@ -217,10 +217,10 @@ Logs in a Firebase user with Facebook Authentication. Make sure your application
 
 **Example**  
 ```js
-fireAuthInstance.loginWithFacebook(false, true, function(authData){
+fireAuthInstance.loginWithFacebook(false, true, "default", "email, user_likes" , function(authData){
      // The authentication was successful and opened within a popup.
      doStuffWith(authData);
-}, "default", "email, user_likes" );
+});
 ```
 <a name="loginWithGithub"></a>
 ## loginWithGithub(redirect, token, sessionTime, permissions, callback)
@@ -238,10 +238,10 @@ Logs in a Firebase user with GitHub Authentication. Make sure your application i
 
 **Example**  
 ```js
-fireAuthInstance.loginWithGithub(false, function(authData){
+fireAuthInstance.loginWithGithub(false, false, "default", "user, notifications, read:org" , function(authData){
      // The authentication was successful and opened within a popup.
      doStuffWith(authData);
-}, "default", "user, notifications, read:org" );
+});
 ```
 <a name="loginWithGoogle"></a>
 ## loginWithGoogle(redirect, token, sessionTime, permissions, callback)
@@ -259,10 +259,10 @@ Logs in a Firebase user with Google Authentication. Make sure your application i
 
 **Example**  
 ```js
-fireAuthInstance.loginWithGoogle(false, function(authData){
+fireAuthInstance.loginWithGoogle(true, false "none", "profile, openid" , function(authData){
      // The authentication was successful and opened within a popup.
      doStuffWith(authData);
-}, "none", "profile, openid" );
+});
 ```
 <a name="loginWithTwitter"></a>
 ## loginWithTwitter(redirect, token, sessionTime, callback)
@@ -279,10 +279,10 @@ Logs in a Firebase user with Twitter Authentication. Make sure your application 
 
 **Example**  
 ```js
-fireAuthInstance.loginWithTwitter(false, function(authData){
+fireAuthInstance.loginWithTwitter(false, true, "sessionOnly", function(authData){
      // The authentication was successful and opened within a popup.
      doStuffWith(authData);
-}, "sessionOnly");
+});
 ```
 <a name="logout"></a>
 ## logout()
@@ -291,14 +291,14 @@ Logs out a user and removes authentication token.
 **Kind**: global function  
 <a name="authChangeListener"></a>
 ## authChangeListener(onLogin, onLogout)
-Event handler checks any changes in user authentication
+Event handler checks any changes in user authentication (Possible alternative to using callbacks from other methods)
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| onLogin | <code>function</code> | A function that will get called if the user becomes authenticated or is already logged in. |
-| onLogout | <code>function</code> | A function that will get called if the user becomes unauthenticated or is already logged out. |
+| onLogin | <code>function</code> | A function with parameter AuthData that will get called if the user becomes authenticated or is already logged in. |
+| onLogout | <code>function</code> | A function with parameter AuthData that will get called if the user becomes unauthenticated or is already logged out. |
 
 **Example**  
 ```js
