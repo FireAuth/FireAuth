@@ -458,15 +458,17 @@ var FireAuth = (function () {
         }
 
         /**
-         * Event handler checks any changes in user authentication (Possible alternative to using callbacks from other methods)
+         * Event handler checks any changes in user authentication. Can also be used as an alternative to callbacks from other login functions.
          * @function authChangeListener
-         * @param {Function} onLogin - A function with parameter AuthData that will get called if the user becomes authenticated or is already logged in.
-         * @param {Function} onLogout - A function with parameter AuthData that will get called if the user becomes unauthenticated or is already logged out.
+         * @param {Function} onLogin - A function with parameter authData that will get called if the user becomes authenticated or is already logged in.
+         * @param {Function} onLogout - A function with parameter authData that will get called if the user becomes unauthenticated or is already logged out.
          * @example
-         * fireAuthInstance.authChangeListener(function(){
-         *      console.log("The user has logged in.")
+         * fireAuthInstance.authChangeListener(function(authData){
+         *      //The user has logged in
+         *      doStuffWith(authData);
          * }, function(){
-         *       console.log("The user has logged out.")
+         *      //The user has logged out
+                doStuffWith(authData);
          * })
          */
     }, {
@@ -478,7 +480,7 @@ var FireAuth = (function () {
                     onLogin(authData);
                 } else {
                     //logged in
-                    onLogout(authData);
+                    onLogout();
                 }
             });
         }

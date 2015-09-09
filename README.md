@@ -70,7 +70,7 @@ or
 <dd><p>Logs out a user and removes authentication token.</p>
 </dd>
 <dt><a href="#authChangeListener">authChangeListener(onLogin, onLogout)</a></dt>
-<dd><p>Event handler checks any changes in user authentication (Possible alternative to using callbacks from other methods)</p>
+<dd><p>Event handler checks any changes in user authentication. Can also be used as an alternative to callbacks from other login functions.</p>
 </dd>
 <dt><a href="#setTokenName">setTokenName(newTokenName)</a></dt>
 <dd><p>Sets the token id or name.</p>
@@ -291,21 +291,23 @@ Logs out a user and removes authentication token.
 **Kind**: global function  
 <a name="authChangeListener"></a>
 ## authChangeListener(onLogin, onLogout)
-Event handler checks any changes in user authentication (Possible alternative to using callbacks from other methods)
+Event handler checks any changes in user authentication. Can also be used as an alternative to callbacks from other login functions.
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| onLogin | <code>function</code> | A function with parameter AuthData that will get called if the user becomes authenticated or is already logged in. |
-| onLogout | <code>function</code> | A function with parameter AuthData that will get called if the user becomes unauthenticated or is already logged out. |
+| onLogin | <code>function</code> | A function with parameter authData that will get called if the user becomes authenticated or is already logged in. |
+| onLogout | <code>function</code> | A function with parameter authData that will get called if the user becomes unauthenticated or is already logged out. |
 
 **Example**  
 ```js
-fireAuthInstance.authChangeListener(function(){
-     console.log("The user has logged in.")
+fireAuthInstance.authChangeListener(function(authData){
+     //The user has logged in
+     doStuffWith(authData);
 }, function(){
-      console.log("The user has logged out.")
+     //The user has logged out
+                doStuffWith(authData);
 })
 ```
 <a name="setTokenName"></a>
