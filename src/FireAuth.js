@@ -265,7 +265,7 @@ class FireAuth {
      * @param {boolean} token - True to create an auth token, false to not create one.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
-     * @param {string} permissions - A set of permissions your application may want to access from the user's Facebook account. Certain permissions will have to be approved by the user and Facebook. Each of these permissions can be accessed through the callback. [Click here](https://developers.facebook.com/docs/facebook-login/permissions/v2.4) to view some of the permmissions that can be access from Facebook.
+     * @param {string} permissions - A set of permissions your application may want to access from the user's Facebook account. Certain permissions will have to be approved by the user and Facebook. Each of these permissions can be accessed through the callback. [Click here](https://developers.facebook.com/docs/facebook-login/permissions/v2.4) to view some of the permissions that can be access from Facebook.
      * @example
      * fireAuthInstance.loginWithFacebook(false, true, function(authData){
      *      // The authentication was successful and opened within a popup.
@@ -307,7 +307,7 @@ class FireAuth {
      * @param {boolean} token - True to create an auth token, false to not create one.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
-     * @param {string} permissions - A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permmissions that can be access from Github.
+     * @param {string} permissions - A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github.
      * @example
      * fireAuthInstance.loginWithGithub(false, function(authData){
      *      // The authentication was successful and opened within a popup.
@@ -348,12 +348,12 @@ class FireAuth {
      * @param {boolean} token - True to create an auth token, false to not create one.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
-     * @param {string} permissions - A set of permissions your application may want to access from the user's Google account. Certain permissions will have to be approved by the user and Google. Each of these permissions can be accessed through the callback. [Click here](https://developers.google.com/+/web/api/rest/oauth#scopes) to view some of the permmissions that can be access from Google.
+     * @param {string} permissions - A set of permissions your application may want to access from the user's Google account. Certain permissions will have to be approved by the user and Google. Each of these permissions can be accessed through the callback. [Click here](https://developers.google.com/+/web/api/rest/oauth#scopes) to view some of the permissions that can be access from Google.
      * @example
      * fireAuthInstance.loginWithGoogle(false, function(authData){
      *      // The authentication was successful and opened within a popup.
      *      doStuffWith(authData);
-     * }, "default", "profile, openid" );
+     * }, "none", "profile, openid" );
      */
     loginWithGoogle(redirect, token, callback, sessionTime, permissions){
         if(redirect){
@@ -388,13 +388,14 @@ class FireAuth {
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
      * @param {boolean} token - True to create an auth token, false to not create one.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+     * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
      * @example
      * fireAuthInstance.loginWithTwitter(false, function(authData){
      *      // The authentication was successful and opened within a popup.
      *      doStuffWith(authData);
-     * }, "default", "email, user_likes" );
+     * }, "sessionOnly");
      */
-    loginWithTwitter(redirect, token, callback){
+    loginWithTwitter(redirect, token, callback, sessionTime){
         if(redirect){
             ref.authWithOAuthRedirect("twitter", function(error){
                 if(error){
@@ -414,7 +415,9 @@ class FireAuth {
                         callback(authData);
                     }
                 }
-            })
+            }, {
+                remember: sessionTime
+            });
         }
     }
 
