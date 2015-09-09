@@ -281,9 +281,9 @@ var FireAuth = (function () {
          * @function loginWithFacebook
          * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook.
          * @param {boolean} token - True to create an auth token, false to not create one.
-         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
          * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
          * @param {string} permissions - A set of permissions your application may want to access from the user's Facebook account. Certain permissions will have to be approved by the user and Facebook. Each of these permissions can be accessed through the callback. [Click here](https://developers.facebook.com/docs/facebook-login/permissions/v2.4) to view some of the permissions that can be access from Facebook.
+         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
          * @example
          * fireAuthInstance.loginWithFacebook(false, true, function(authData){
          *      // The authentication was successful and opened within a popup.
@@ -292,7 +292,7 @@ var FireAuth = (function () {
          */
     }, {
         key: "loginWithFacebook",
-        value: function loginWithFacebook(redirect, token, callback, sessionTime, permissions) {
+        value: function loginWithFacebook(redirect, token, sessionTime, permissions, callback) {
             if (redirect) {
                 ref.authWithOAuthRedirect("facebook", function (error) {
                     if (error) {
@@ -324,9 +324,9 @@ var FireAuth = (function () {
          * @function loginWithGithub
          * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to GitHub.
          * @param {boolean} token - True to create an auth token, false to not create one.
-         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
          * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
          * @param {string} permissions - A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github.
+         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
          * @example
          * fireAuthInstance.loginWithGithub(false, function(authData){
          *      // The authentication was successful and opened within a popup.
@@ -335,7 +335,7 @@ var FireAuth = (function () {
          */
     }, {
         key: "loginWithGithub",
-        value: function loginWithGithub(redirect, token, callback, sessionTime, permissions) {
+        value: function loginWithGithub(redirect, token, sessionTime, permissions, callback) {
             if (redirect) {
                 ref.authWithOAuthRedirect("github", function (error) {
                     if (error) {
@@ -367,9 +367,9 @@ var FireAuth = (function () {
          * @function loginWithGoogle
          * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
          * @param {boolean} token - True to create an auth token, false to not create one.
-         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
          * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
          * @param {string} permissions - A set of permissions your application may want to access from the user's Google account. Certain permissions will have to be approved by the user and Google. Each of these permissions can be accessed through the callback. [Click here](https://developers.google.com/+/web/api/rest/oauth#scopes) to view some of the permissions that can be access from Google.
+         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
          * @example
          * fireAuthInstance.loginWithGoogle(false, function(authData){
          *      // The authentication was successful and opened within a popup.
@@ -378,7 +378,7 @@ var FireAuth = (function () {
          */
     }, {
         key: "loginWithGoogle",
-        value: function loginWithGoogle(redirect, token, callback, sessionTime, permissions) {
+        value: function loginWithGoogle(redirect, token, sessionTime, permissions, callback) {
             if (redirect) {
                 ref.authWithOAuthRedirect("google", function (error) {
                     if (error) {
@@ -410,8 +410,8 @@ var FireAuth = (function () {
          * @function loginWithTwitter
          * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
          * @param {boolean} token - True to create an auth token, false to not create one.
-         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
          * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
+         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
          * @example
          * fireAuthInstance.loginWithTwitter(false, function(authData){
          *      // The authentication was successful and opened within a popup.
@@ -420,7 +420,7 @@ var FireAuth = (function () {
          */
     }, {
         key: "loginWithTwitter",
-        value: function loginWithTwitter(redirect, token, callback, sessionTime) {
+        value: function loginWithTwitter(redirect, token, sessionTime, callback) {
             if (redirect) {
                 ref.authWithOAuthRedirect("twitter", function (error) {
                     if (error) {

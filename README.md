@@ -54,16 +54,16 @@ or
 <dt><a href="#deleteUserWithEmail">deleteUserWithEmail(email, password, callback)</a></dt>
 <dd><p>Deletes a Firebase user with Email and Password Authentication.</p>
 </dd>
-<dt><a href="#loginWithFacebook">loginWithFacebook(redirect, token, callback, sessionTime, permissions)</a></dt>
+<dt><a href="#loginWithFacebook">loginWithFacebook(redirect, token, sessionTime, permissions, callback)</a></dt>
 <dd><p>Logs in a Firebase user with Facebook Authentication. Make sure your application is <a href="https://www.firebase.com/docs/web/guide/login/facebook.html">configured as a Facebook App</a>.</p>
 </dd>
-<dt><a href="#loginWithGithub">loginWithGithub(redirect, token, callback, sessionTime, permissions)</a></dt>
+<dt><a href="#loginWithGithub">loginWithGithub(redirect, token, sessionTime, permissions, callback)</a></dt>
 <dd><p>Logs in a Firebase user with GitHub Authentication. Make sure your application is <a href="https://www.firebase.com/docs/web/guide/login/github.html">configured as a GitHub App</a>.</p>
 </dd>
-<dt><a href="#loginWithGoogle">loginWithGoogle(redirect, token, callback, sessionTime, permissions)</a></dt>
+<dt><a href="#loginWithGoogle">loginWithGoogle(redirect, token, sessionTime, permissions, callback)</a></dt>
 <dd><p>Logs in a Firebase user with Google Authentication. Make sure your application is <a href="https://www.firebase.com/docs/web/guide/login/google.html">configured as a Google App</a>.</p>
 </dd>
-<dt><a href="#loginWithTwitter">loginWithTwitter(redirect, token, callback, sessionTime)</a></dt>
+<dt><a href="#loginWithTwitter">loginWithTwitter(redirect, token, sessionTime, callback)</a></dt>
 <dd><p>Logs in a Firebase user with Twitter Authentication. Make sure your application is <a href="https://www.firebase.com/docs/web/guide/login/twitter.html">configured as a Twitter App</a>.</p>
 </dd>
 <dt><a href="#logout">logout()</a></dt>
@@ -202,7 +202,7 @@ fireAuthInstance.deleteUserWithEmail("john@doe.com", "correcthorsebatterystaple"
 })
 ```
 <a name="loginWithFacebook"></a>
-## loginWithFacebook(redirect, token, callback, sessionTime, permissions)
+## loginWithFacebook(redirect, token, sessionTime, permissions, callback)
 Logs in a Firebase user with Facebook Authentication. Make sure your application is [configured as a Facebook App](https://www.firebase.com/docs/web/guide/login/facebook.html).
 
 **Kind**: global function  
@@ -211,9 +211,9 @@ Logs in a Firebase user with Facebook Authentication. Make sure your application
 | --- | --- | --- |
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook. |
 | token | <code>boolean</code> | True to create an auth token, false to not create one. |
-| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 | sessionTime | <code>string</code> | If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed. |
 | permissions | <code>string</code> | A set of permissions your application may want to access from the user's Facebook account. Certain permissions will have to be approved by the user and Facebook. Each of these permissions can be accessed through the callback. [Click here](https://developers.facebook.com/docs/facebook-login/permissions/v2.4) to view some of the permissions that can be access from Facebook. |
+| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
 **Example**  
 ```js
@@ -223,7 +223,7 @@ fireAuthInstance.loginWithFacebook(false, true, function(authData){
 }, "default", "email, user_likes" );
 ```
 <a name="loginWithGithub"></a>
-## loginWithGithub(redirect, token, callback, sessionTime, permissions)
+## loginWithGithub(redirect, token, sessionTime, permissions, callback)
 Logs in a Firebase user with GitHub Authentication. Make sure your application is [configured as a GitHub App](https://www.firebase.com/docs/web/guide/login/github.html).
 
 **Kind**: global function  
@@ -232,9 +232,9 @@ Logs in a Firebase user with GitHub Authentication. Make sure your application i
 | --- | --- | --- |
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to GitHub. |
 | token | <code>boolean</code> | True to create an auth token, false to not create one. |
-| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 | sessionTime | <code>string</code> | If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed. |
 | permissions | <code>string</code> | A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github. |
+| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
 **Example**  
 ```js
@@ -244,7 +244,7 @@ fireAuthInstance.loginWithGithub(false, function(authData){
 }, "default", "user, notifications, read:org" );
 ```
 <a name="loginWithGoogle"></a>
-## loginWithGoogle(redirect, token, callback, sessionTime, permissions)
+## loginWithGoogle(redirect, token, sessionTime, permissions, callback)
 Logs in a Firebase user with Google Authentication. Make sure your application is [configured as a Google App](https://www.firebase.com/docs/web/guide/login/google.html).
 
 **Kind**: global function  
@@ -253,9 +253,9 @@ Logs in a Firebase user with Google Authentication. Make sure your application i
 | --- | --- | --- |
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google. |
 | token | <code>boolean</code> | True to create an auth token, false to not create one. |
-| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 | sessionTime | <code>string</code> | If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed. |
 | permissions | <code>string</code> | A set of permissions your application may want to access from the user's Google account. Certain permissions will have to be approved by the user and Google. Each of these permissions can be accessed through the callback. [Click here](https://developers.google.com/+/web/api/rest/oauth#scopes) to view some of the permissions that can be access from Google. |
+| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
 **Example**  
 ```js
@@ -265,7 +265,7 @@ fireAuthInstance.loginWithGoogle(false, function(authData){
 }, "none", "profile, openid" );
 ```
 <a name="loginWithTwitter"></a>
-## loginWithTwitter(redirect, token, callback, sessionTime)
+## loginWithTwitter(redirect, token, sessionTime, callback)
 Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
 
 **Kind**: global function  
@@ -274,8 +274,8 @@ Logs in a Firebase user with Twitter Authentication. Make sure your application 
 | --- | --- | --- |
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter. |
 | token | <code>boolean</code> | True to create an auth token, false to not create one. |
-| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 | sessionTime | <code>string</code> | If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed. |
+| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
 
 **Example**  
 ```js
