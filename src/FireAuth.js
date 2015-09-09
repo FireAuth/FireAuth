@@ -24,7 +24,7 @@
 
 /**
  * @class FireAuth
- * @attribute {string} tokenName - name of the token that will be stored in user's browser (This should not be kept default)
+ * @attribute {string} tokenName - name of the token that will be stored in user's browser (This should not be kept default and should remain constant)
  * @constructor FireAuth
  * @param {string} firebaseURL - The URL of the Firebase reference.
  */
@@ -334,7 +334,7 @@ class FireAuth {
      * fireAuthInstance.loginWithGoogle(false, function(authData){
      *      // The authentication was successful and opened within a popup.
      *      doStuffWith(authData);
-     * }); 
+     * });
      */
     loginWithGoogle(redirect, callback){
         if(redirect){
@@ -422,6 +422,17 @@ class FireAuth {
                 onLogout();
             }
         });
+    }
+
+    /**
+     * Sets the token id or name.
+     * @function setTokenName
+     * @param {string} newTokenName - the new name of your token.
+     * @example
+     * setTokenName("myTokenForMyFirstWebApp");
+     */
+    setTokenName(newTokenName){
+        this.tokenName = newTokenName
     }
 
     //regex to check if the text is an email

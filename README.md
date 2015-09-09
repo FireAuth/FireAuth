@@ -72,13 +72,16 @@ or
 <dt><a href="#authChangeListener">authChangeListener(onLogin, onLogout)</a></dt>
 <dd><p>Event handler checks any changes in user authentication</p>
 </dd>
+<dt><a href="#setTokenName">setTokenName(newTokenName)</a></dt>
+<dd><p>Sets the token id or name.</p>
+</dd>
 </dl>
 <a name="FireAuth"></a>
 ## FireAuth
 FireAuth
 
 **Kind**: global class  
-**Attribute**: <code>string</code> tokenName - name of the token that will be stored in user's browser (This should not be kept default)  
+**Attribute**: <code>string</code> tokenName - name of the token that will be stored in user's browser (This should not be kept default and should remain constant)  
 <a name="new_FireAuth_new"></a>
 ### new FireAuth(firebaseURL)
 
@@ -250,7 +253,7 @@ Logs in a Firebase user with Google Authentication. Make sure your application i
 fireAuthInstance.loginWithGoogle(false, function(authData){
      // The authentication was successful and opened within a popup.
      doStuffWith(authData);
-}); 
+});
 ```
 <a name="loginWithTwitter"></a>
 ## loginWithTwitter(redirect, callback)
@@ -293,6 +296,20 @@ fireAuthInstance.authChangeListener(function(){
 }, function(){
       console.log("The user has logged out.")
 })
+```
+<a name="setTokenName"></a>
+## setTokenName(newTokenName)
+Sets the token id or name.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| newTokenName | <code>string</code> | the new name of your token. |
+
+**Example**  
+```js
+setTokenName("myTokenForMyFirstWebApp");
 ```
 
 
