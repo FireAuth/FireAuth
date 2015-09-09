@@ -369,7 +369,7 @@ var FireAuth = (function () {
          * @param {boolean} token - True to create an auth token, false to not create one.
          * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
          * @param {string} permissions - A set of permissions your application may want to access from the user's Google account. Certain permissions will have to be approved by the user and Google. Each of these permissions can be accessed through the callback. [Click here](https://developers.google.com/+/web/api/rest/oauth#scopes) to view some of the permissions that can be access from Google.
-         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
          * @example
          * fireAuthInstance.loginWithGoogle(true, false "none", "profile, openid" , function(authData){
          *      // The authentication was successful and opened within a popup.
@@ -411,7 +411,7 @@ var FireAuth = (function () {
          * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
          * @param {boolean} token - True to create an auth token, false to not create one.
          * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
-         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+         * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function]
          * @example
          * fireAuthInstance.loginWithTwitter(false, true, "sessionOnly", function(authData){
          *      // The authentication was successful and opened within a popup.
@@ -466,9 +466,9 @@ var FireAuth = (function () {
          * fireAuthInstance.authChangeListener(function(authData){
          *      //The user has logged in
          *      doStuffWith(authData);
-         * }, function(){
+         * }, function(authData){
          *      //The user has logged out
-                doStuffWith(authData);
+         *      doStuffWith(authData);
          * })
          */
     }, {
@@ -480,7 +480,7 @@ var FireAuth = (function () {
                     onLogin(authData);
                 } else {
                     //logged in
-                    onLogout();
+                    onLogout(authData);
                 }
             });
         }
