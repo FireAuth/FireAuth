@@ -213,7 +213,7 @@ Logs in a Firebase user with Facebook Authentication. Make sure your application
 | token | <code>boolean</code> | True to create an auth token, false to not create one. |
 | sessionTime | <code>string</code> | If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed. |
 | permissions | <code>string</code> | A set of permissions your application may want to access from the user's Facebook account. Certain permissions will have to be approved by the user and Facebook. Each of these permissions can be accessed through the callback. [Click here](https://developers.facebook.com/docs/facebook-login/permissions/v2.4) to view some of the permissions that can be access from Facebook. |
-| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
+| callback | <code>function</code> | Optional callback function with parameter (authData)[https://www.firebase.com/docs/web/guide/login/facebook.html#section-logging-in] that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function] |
 
 **Example**  
 ```js
@@ -234,7 +234,7 @@ Logs in a Firebase user with GitHub Authentication. Make sure your application i
 | token | <code>boolean</code> | True to create an auth token, false to not create one. |
 | sessionTime | <code>string</code> | If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed. |
 | permissions | <code>string</code> | A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github. |
-| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) |
+| callback | <code>function</code> | Optional callback function with parameter (authData)[https://www.firebase.com/docs/web/guide/login/github.html#section-logging-in] that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function] |
 
 **Example**  
 ```js
@@ -255,7 +255,7 @@ Logs in a Firebase user with Google Authentication. Make sure your application i
 | token | <code>boolean</code> | True to create an auth token, false to not create one. |
 | sessionTime | <code>string</code> | If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed. |
 | permissions | <code>string</code> | A set of permissions your application may want to access from the user's Google account. Certain permissions will have to be approved by the user and Google. Each of these permissions can be accessed through the callback. [Click here](https://developers.google.com/+/web/api/rest/oauth#scopes) to view some of the permissions that can be access from Google. |
-| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function] |
+| callback | <code>function</code> | Optional callback function with parameter (authData)[https://www.firebase.com/docs/web/guide/login/google.html#section-logging-in] that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function] |
 
 **Example**  
 ```js
@@ -275,7 +275,7 @@ Logs in a Firebase user with Twitter Authentication. Make sure your application 
 | redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter. |
 | token | <code>boolean</code> | True to create an auth token, false to not create one. |
 | sessionTime | <code>string</code> | If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed. |
-| callback | <code>function</code> | Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function] |
+| callback | <code>function</code> | Optional callback function with parameter (authData)[https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in] that will not get called if redirect is true. (Called upon successful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function] |
 
 **Example**  
 ```js
