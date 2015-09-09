@@ -262,14 +262,17 @@ class FireAuth {
      * Logs in a Firebase user with Facebook Authentication. Make sure your application is [configured as a Facebook App](https://www.firebase.com/docs/web/guide/login/facebook.html).
      * @function loginWithFacebook
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook.
+     * @param {boolean} token - True to create an auth token, false to not create one.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
+     * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
+     * @param {string} permissions - a set of permissions your application will want to access from the user's Facebook account
      * @example
-     * fireAuthInstance.loginWithFacebook(false, function(authData){
+     * fireAuthInstance.loginWithFacebook(false, true, function(authData){
      *      // The authentication was successful and opened within a popup.
      *      doStuffWith(authData);
-     * });
+     * }, "default", "email,user_likes" );
      */
-    loginWithFacebook(redirect, callback){
+    loginWithFacebook(redirect, token, callback, sessionTime, permissions){
         if(redirect){
             ref.authWithOAuthRedirect("facebook", function(error){
                 if(error){
@@ -282,12 +285,17 @@ class FireAuth {
                     throw "Authentication Failed! " + error;
                 }else{
                     console.log("Authenticated successfully with payload:", authData);
-                    localStorage.setItem(this.tokenName, authData.token);
+                    if(token){
+                        localStorage.setItem(this.tokenName, authData.token);
+                    }
                     if(typeof callback == "function"){
                         callback(authData);
                     }
                 }
-            })
+            },{
+                remember: sessionTime,
+                scope: permissions
+            });
         }
     }
 
@@ -296,6 +304,7 @@ class FireAuth {
      * Logs in a Firebase user with GitHub Authentication. Make sure your application is [configured as a GitHub App](https://www.firebase.com/docs/web/guide/login/github.html).
      * @function loginWithGithub
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to GitHub.
+     * @param {boolean} token - True to create an auth token, false to not create one.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @example
      * fireAuthInstance.loginWithGithub(false, function(authData){
@@ -303,7 +312,7 @@ class FireAuth {
      *      doStuffWith(authData);
      * });
      */
-    loginWithGithub(redirect, callback){
+    loginWithGithub(redirect, token, callback){
         if(redirect){
             ref.authWithOAuthRedirect("github", function(error){
                 if(error){
@@ -316,7 +325,9 @@ class FireAuth {
                     throw "Authentication Failed! " + error;
                 }else{
                     console.log("Authenticated successfully with payload:", authData);
-                    localStorage.setItem(this.tokenName, authData.token);
+                    if(token){
+                        localStorage.setItem(this.tokenName, authData.token);
+                    }
                     if(typeof callback == "function"){
                         callback(authData);
                     }
@@ -329,6 +340,7 @@ class FireAuth {
      * Logs in a Firebase user with Google Authentication. Make sure your application is [configured as a Google App](https://www.firebase.com/docs/web/guide/login/google.html).
      * @function loginWithGoogle
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
+     * @param {boolean} token - True to create an auth token, false to not create one.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @example
      * fireAuthInstance.loginWithGoogle(false, function(authData){
@@ -336,7 +348,7 @@ class FireAuth {
      *      doStuffWith(authData);
      * });
      */
-    loginWithGoogle(redirect, callback){
+    loginWithGoogle(redirect, token, callback){
         if(redirect){
             ref.authWithOAuthRedirect("google", function(error){
                 if(error){
@@ -349,7 +361,9 @@ class FireAuth {
                     throw "Authentication Failed! " + error;
                 }else{
                     console.log("Authenticated successfully with payload:", authData);
-                    localStorage.setItem(this.tokenName, authData.token);
+                    if(token){
+                        localStorage.setItem(this.tokenName, authData.token);
+                    }
                     if(typeof callback == "function"){
                         callback(authData);
                     }
@@ -362,6 +376,7 @@ class FireAuth {
      * Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
      * @function loginWithTwitter
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
+     * @param {boolean} token - True to create an auth token, false to not create one.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @example
      * fireAuthInstance.loginWithTwitter(false, function(authData){
@@ -369,7 +384,7 @@ class FireAuth {
      *      doStuffWith(authData);
      * });
      */
-    loginWithTwitter(redirect, callback){
+    loginWithTwitter(redirect, token, callback){
         if(redirect){
             ref.authWithOAuthRedirect("twitter", function(error){
                 if(error){
@@ -382,7 +397,9 @@ class FireAuth {
                     throw "Authentication Failed! " + error;
                 }else{
                     console.log("Authenticated successfully with payload:", authData);
-                    localStorage.setItem(this.tokenName, authData.token);
+                    if(token){
+                        localStorage.setItem(this.tokenName, authData.token);
+                    }
                     if(typeof callback == "function"){
                         callback(authData);
                     }
