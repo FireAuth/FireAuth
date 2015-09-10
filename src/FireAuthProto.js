@@ -29,12 +29,13 @@ Firebase.prototype.tokenName = "myToken";
 * Checks for any tokens existing from a user's session, and authenticates it (Logs the user in).
 * @function checkForAvailableToken
 * @param  {Function} foundToken - A function with the parameter authData that will get called if a token.
-* @param  {Function} noToken - A function with the parameter error that will get called if no token is found. 
+* @param  {Function} noToken - A function with the parameter error that will get called if no token is found.
 * @example
-* ref.createUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(userData){
-*      // The user creation was successful
-*      doStuffWith(userData);
-* })
+* ref.checkForAvailableToken(function(authData){
+*       doStuffWith(authData);
+* },function(error){
+*       doStuffWith(error);
+* });
 */
 Firebase.prototype.checkForAvailableToken = function(foundToken, noToken){
     var token = localStorage.getItem(this.tokenName);
@@ -60,7 +61,7 @@ Firebase.prototype.checkForAvailableToken = function(foundToken, noToken){
 * @param  {string} password - The user's password
 * @param  {Function} callback - Optional callback function with parameter userData. (Called upon successful account creation)
 * @example
-* fireAuthInstance.createUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(userData){
+* ref.createUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(userData){
 *      // The user creation was successful
 *      doStuffWith(userData);
 * })
@@ -91,7 +92,7 @@ Firebase.prototype.createUserWithEmail = function(email, password, callback){
 * @param  {boolean} token - True to create an auth token, false to not create one.
 * @param  {function} callback - Optional callback function with parameter authData. (Called upon successful login)
 * @example
-* fireAuthInstance.loginWithEmail("john@doe.com", "correcthorsebatterystaple", false, function(authData){
+* ref.loginWithEmail("john@doe.com", "correcthorsebatterystaple", false, function(authData){
 *      // The authentication was successful.
 *      doStuffWith(authData);
 * })
@@ -126,7 +127,7 @@ Firebase.prototype.loginWithEmail = function(email, password, token, callback){
 * @param  {string} newPassword - The user's new password
 * @param  {Function} callback - Optional callback function. (Called upon successful password change)
 * @example
-* fireAuthInstance.changeUserPassword("john@doe.com", "correcthorsebatterystaple", "youwillneverguessthis", function(){
+* ref.changeUserPassword("john@doe.com", "correcthorsebatterystaple", "youwillneverguessthis", function(){
 *      // Password has been changed - handle anything else here.
 * })
 */
@@ -162,7 +163,7 @@ Firebase.prototype.changeUserPassword = function(email, oldPassword, newPassword
 * @param  {string} password - The user's password
 * @param  {Function} callback - Optional callback function. (Called upon successful email change)
 * @example
-* fireAuthInstance.changeUserEmail("john@doe.com", "jane@doe.com", "correcthorsebatterystaple", function(){
+* ref.changeUserEmail("john@doe.com", "jane@doe.com", "correcthorsebatterystaple", function(){
 *      // Email has been changed - handle anything else here.
 * })
 */
@@ -196,7 +197,7 @@ Firebase.prototype.changeUserEmail = function(oldEmail, newEmail, password, call
 * @param  {string} email - The user's email
 * @param  {Function} callback - Optional callback function. (Called once reset email is sent)
 * @example
-* fireAuthInstance.resetUserPassword("john@doe.com", function(){
+* ref.resetUserPassword("john@doe.com", function(){
 *      // Email has been sent - handle anything else here.
 * })
 */
@@ -231,7 +232,7 @@ Firebase.prototype.resetUserPassword = function(email, callback){
 * @param  {string} password - The user's password
 * @param  {Function} callback - Optional callback function. (Called upon successful account deletion)
 * @example
-* fireAuthInstance.deleteUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(){
+* ref.deleteUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(){
 *      // Successfully deleted user within Firebase - Handle anything else here.
 * })
 */
@@ -269,7 +270,7 @@ Firebase.prototype.deleteUserWithEmail = function(email, password, callback){
 * @param {string} permissions - A set of permissions your application may want to access from the user's Facebook account. Certain permissions will have to be approved by the user and Facebook. Each of these permissions can be accessed through the callback. [Click here](https://developers.facebook.com/docs/facebook-login/permissions/v2.4) to view some of the permissions that can be access from Facebook.
 * @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/facebook.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
 * @example
-* fireAuthInstance.loginWithFacebook(false, true, "default", "email, user_likes" , function(authData){
+* ref.loginWithFacebook(false, true, "default", "email, user_likes" , function(authData){
 *      // The authentication was successful and opened within a popup.
 *      doStuffWith(authData);
 * });
@@ -311,7 +312,7 @@ Firebase.prototype.loginWithFacebook = function(redirect, token, sessionTime, pe
 * @param {string} permissions - A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github.
 * @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/github.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
 * @example
-* fireAuthInstance.loginWithGithub(false, false, "default", "user, notifications, read:org" , function(authData){
+* ref.loginWithGithub(false, false, "default", "user, notifications, read:org" , function(authData){
 *      // The authentication was successful and opened within a popup.
 *      doStuffWith(authData);
 * });
@@ -352,7 +353,7 @@ Firebase.prototype.loginWithGithub = function(redirect, token, sessionTime, perm
 * @param {string} permissions - A set of permissions your application may want to access from the user's Google account. Certain permissions will have to be approved by the user and Google. Each of these permissions can be accessed through the callback. [Click here](https://developers.google.com/+/web/api/rest/oauth#scopes) to view some of the permissions that can be access from Google.
 * @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/google.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
 * @example
-* fireAuthInstance.loginWithGoogle(true, false "none", "profile, openid" , function(authData){
+* ref.loginWithGoogle(true, false "none", "profile, openid" , function(authData){
 *      // The authentication was successful and opened within a popup.
 *      doStuffWith(authData);
 * });
@@ -392,7 +393,7 @@ Firebase.prototype.loginWithGoogle = function(redirect, token, sessionTime, perm
 * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
 * @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function]
 * @example
-* fireAuthInstance.loginWithTwitter(false, true, "sessionOnly", function(authData){
+* ref.loginWithTwitter(false, true, "sessionOnly", function(authData){
 *      // The authentication was successful and opened within a popup.
 *      doStuffWith(authData);
 * });
@@ -426,6 +427,8 @@ Firebase.prototype.loginWithTwitter = function(redirect, token, sessionTime, cal
 /**
 * Logs out a user and removes authentication token.
 * @function logout
+* @example
+* ref.logout();
 */
 Firebase.prototype.logout = function(){
     this.unauth();
@@ -438,7 +441,7 @@ Firebase.prototype.logout = function(){
 * @param {Function} onLogin - A function with parameter authData that will get called if the user becomes authenticated or is already logged in.
 * @param {Function} onLogout - A function with parameter authData that will get called if the user becomes unauthenticated or is already logged out.
 * @example
-* fireAuthInstance.authChangeListener(function(authData){
+* ref.authChangeListener(function(authData){
 *      //The user has logged in
 *      doStuffWith(authData);
 * }, function(authData){
@@ -463,7 +466,7 @@ Firebase.prototype.authChangeListener = function(onLogin, onLogout){
 * @function setTokenName
 * @param {string} newTokenName - the new name of your token.
 * @example
-* setTokenName("myTokenForMyFirstWebApp");
+* ref.setTokenName("myTokenForMyFirstWebApp");
 */
 Firebase.prototype.setTokenName = function(newTokenName){
     this.tokenName = newTokenName;
