@@ -392,8 +392,9 @@ class FireAuth {
      * @param {string} options.sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of 
      * your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication 
      * data at all and will end authentication as soon as the page is closed.
-     * @param {Function} callback - Optional callback function with parameter [error and authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in) 
-     * that will not get called if redirect is true. (Called upon successful or unsuccessful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function]
+     * @param {Function} callback - Optional callback function with parameters [error](https://www.firebase.com/docs/web/guide/user-auth.html#section-full-error) and 
+     * [authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in) that will not get called if redirect is true. 
+     * (Called upon successful or unsuccessful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function]
      * @example
      * fireAuthInstance.loginWithTwitter(false, true, "sessionOnly", function(authData){
      *      // The authentication was successful and opened within a popup.
