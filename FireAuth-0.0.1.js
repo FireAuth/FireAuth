@@ -161,7 +161,9 @@ var FireAuth = (function () {
                     }
                 } else {
                     console.log("User password changed successfully!");
-                    callback();
+                    if (typeof callback == "function") {
+                        callback();
+                    }
                 }
             });
         }
@@ -199,7 +201,9 @@ var FireAuth = (function () {
                     }
                 } else {
                     console.log("User email changed successfully!");
-                    callback();
+                    if (typeof callback == "function") {
+                        callback();
+                    }
                 }
             });
         }
@@ -233,7 +237,9 @@ var FireAuth = (function () {
                     }
                 } else {
                     console.log("User email changed successfully!");
-                    callback();
+                    if (typeof callback == "function") {
+                        callback();
+                    }
                 }
             });
         }
@@ -442,9 +448,10 @@ var FireAuth = (function () {
                         if (options.token) {
                             localStorage.setItem(this.tokenName, authData.token);
                         }
-                        if (typeof callback == "function") {}
                     }
-                    callback(error, authData);
+                    if (typeof callback == "function") {
+                        callback(error, authData);
+                    }
                 }, {
                     remember: options.sessionTime
                 });
