@@ -45,7 +45,7 @@ var FireAuth = (function () {
         _classCallCheck(this, FireAuth);
 
         this.ref = new Firebase(firebaseURL);
-        this.tokenName = this.tokenName;
+        this.tokenName = '';
         this.token = localStorage.getItem(this.tokenName);
 
         if (token == null) {
@@ -408,10 +408,14 @@ var FireAuth = (function () {
         /**
          * Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
          * @function loginWithTwitter
-         * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
-         * @param {boolean} token - True to create an auth token, false to not create one.
-         * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
-         * @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function]
+         * @param {object} options - Object with optional values.
+         * @param {boolean} options.redirect - Whether the webpage should redirect the current page. If false or not defined the webpage will just open a popup to Twitter.
+         * @param {boolean} options.token - True to create an auth token, false or undefined to not create one.
+         * @param {string} options.sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of 
+         * your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication 
+         * data at all and will end authentication as soon as the page is closed.
+         * @param {Function} callback - Optional callback function with parameter [error and authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in) 
+         * that will not get called if redirect is true. (Called upon successful or unsuccessful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function]
          * @example
          * fireAuthInstance.loginWithTwitter(false, true, "sessionOnly", function(authData){
          *      // The authentication was successful and opened within a popup.
@@ -420,8 +424,9 @@ var FireAuth = (function () {
          */
     }, {
         key: "loginWithTwitter",
-        value: function loginWithTwitter(redirect, token, sessionTime, callback) {
-            if (redirect) {
+        value: function loginWithTwitter(options, callback) {
+            if (options.redirect) {
+
                 ref.authWithOAuthRedirect("twitter", function (error) {
                     if (error) {
                         throw "Authentication Failed! " + error;
@@ -433,15 +438,14 @@ var FireAuth = (function () {
                         throw "Authentication Failed! " + error;
                     } else {
                         console.log("Authenticated successfully with payload:", authData);
-                        if (token) {
+                        if (options.token) {
                             localStorage.setItem(this.tokenName, authData.token);
                         }
-                        if (typeof callback == "function") {
-                            callback(authData);
-                        }
+                        if (typeof callback == "function") {}
                     }
+                    callback(error, authData);
                 }, {
-                    remember: sessionTime
+                    remember: options.sessionTime
                 });
             }
         }
