@@ -266,16 +266,16 @@ class FireAuth {
      * @function loginWithFacebook
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook.
      * @param {boolean} token - True to create an auth token, false to not create one.
-     * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
      * @param {string} permissions - A set of permissions your application may want to access from the user's Facebook account. Certain permissions will have to be approved by the user and Facebook. Each of these permissions can be accessed through the callback. [Click here](https://developers.facebook.com/docs/facebook-login/permissions/v2.4) to view some of the permissions that can be access from Facebook.
+     * @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/facebook.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
      * @example
-     * fireAuthInstance.loginWithFacebook(false, true, function(authData){
+     * fireAuthInstance.loginWithFacebook(false, true, "default", "email, user_likes" , function(authData){
      *      // The authentication was successful and opened within a popup.
      *      doStuffWith(authData);
-     * }, "default", "email, user_likes" );
+     * });
      */
-    loginWithFacebook(redirect, token, callback, sessionTime, permissions){
+    loginWithFacebook(redirect, token, sessionTime, permissions, callback){
         if(redirect){
             ref.authWithOAuthRedirect("facebook", function(error){
                 if(error){
@@ -308,16 +308,16 @@ class FireAuth {
      * @function loginWithGithub
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to GitHub.
      * @param {boolean} token - True to create an auth token, false to not create one.
-     * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
      * @param {string} permissions - A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github.
+     * @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/github.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
      * @example
-     * fireAuthInstance.loginWithGithub(false, function(authData){
+     * fireAuthInstance.loginWithGithub(false, false, "default", "user, notifications, read:org" , function(authData){
      *      // The authentication was successful and opened within a popup.
      *      doStuffWith(authData);
-     * }, "default", "user, notifications, read:org" );
+     * });
      */
-    loginWithGithub(redirect, token, callback, sessionTime, permissions){
+    loginWithGithub(redirect, token, sessionTime, permissions, callback){
         if(redirect){
             ref.authWithOAuthRedirect("github", function(error){
                 if(error){
@@ -349,16 +349,16 @@ class FireAuth {
      * @function loginWithGoogle
      * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
      * @param {boolean} token - True to create an auth token, false to not create one.
-     * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
      * @param {string} permissions - A set of permissions your application may want to access from the user's Google account. Certain permissions will have to be approved by the user and Google. Each of these permissions can be accessed through the callback. [Click here](https://developers.google.com/+/web/api/rest/oauth#scopes) to view some of the permissions that can be access from Google.
+     * @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/google.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
      * @example
-     * fireAuthInstance.loginWithGoogle(false, function(authData){
+     * fireAuthInstance.loginWithGoogle(true, false "none", "profile, openid" , function(authData){
      *      // The authentication was successful and opened within a popup.
      *      doStuffWith(authData);
-     * }, "none", "profile, openid" );
+     * });
      */
-    loginWithGoogle(redirect, token, callback, sessionTime, permissions){
+    loginWithGoogle(redirect, token, sessionTime, permissions, callback){
         if(redirect){
             ref.authWithOAuthRedirect("google", function(error){
                 if(error){
@@ -388,6 +388,7 @@ class FireAuth {
     /**
      * Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
      * @function loginWithTwitter
+<<<<<<< HEAD
      * @param {object} options - Object with optional values
      * @param {boolean} options.redirect - Whether the webpage should redirect the current page. If false or not defined the webpage will just open a popup to Twitter.
      * @param {boolean} options.token - True to create an auth token, false or undefined to not create one.
@@ -396,14 +397,21 @@ class FireAuth {
      * data at all and will end authentication as soon as the page is closed.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
      * 
+=======
+     * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
+     * @param {boolean} token - True to create an auth token, false to not create one.
+     * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
+     * @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function]
+>>>>>>> 337997bb6a18c26c2b6ce884731d8b50f6d51840
      * @example
-     * fireAuthInstance.loginWithTwitter(false, function(authData){
+     * fireAuthInstance.loginWithTwitter(false, true, "sessionOnly", function(authData){
      *      // The authentication was successful and opened within a popup.
      *      doStuffWith(authData);
-     * }, "sessionOnly");
+     * });
      */
     loginWithTwitter(options, callback){
         if(options.redirect){
+
             ref.authWithOAuthRedirect("twitter", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
@@ -438,25 +446,27 @@ class FireAuth {
     }
 
     /**
-     * Event handler checks any changes in user authentication
+     * Event handler checks any changes in user authentication. Can also be used as an alternative to callbacks from other login functions.
      * @function authChangeListener
-     * @param {Function} onLogin - A function that will get called if the user becomes authenticated or is already logged in.
-     * @param {Function} onLogout - A function that will get called if the user becomes unauthenticated or is already logged out.
+     * @param {Function} onLogin - A function with parameter authData that will get called if the user becomes authenticated or is already logged in.
+     * @param {Function} onLogout - A function with parameter authData that will get called if the user becomes unauthenticated or is already logged out.
      * @example
-     * fireAuthInstance.authChangeListener(function(){
-     *      console.log("The user has logged in.")
-     * }, function(){
-     *       console.log("The user has logged out.")
+     * fireAuthInstance.authChangeListener(function(authData){
+     *      //The user has logged in
+     *      doStuffWith(authData);
+     * }, function(authData){
+     *      //The user has logged out
+     *      doStuffWith(authData);
      * })
      */
     authChangeListener(onLogin, onLogout){
-        ref.onAuth(function(){
+        ref.onAuth(function(authData){
             if(ref.getAuth() == null){
                 //not logged in
-                onLogin();
+                onLogin(authData);
             }else{
                 //logged in
-                onLogout();
+                onLogout(authData);
             }
         });
     }
@@ -469,7 +479,7 @@ class FireAuth {
      * setTokenName("myTokenForMyFirstWebApp");
      */
     setTokenName(newTokenName){
-        this.tokenName = newTokenName
+        this.tokenName = newTokenName;
     }
 
     //regex to check if the text is an email
