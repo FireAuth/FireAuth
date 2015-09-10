@@ -25,16 +25,29 @@
 
 Firebase.prototype.tokenName = "myToken";
 
-if(token == null){
-    ref.token = "No Token";
-}
-
-Firebase.prototype.checkForAvailableToken = function(){
-    this.authWithCustomToken(localStorage.getItem(this.tokenName), function(error, result) {
+/**
+* Checks for any tokens existing from a user's session, and authenticates it (Logs the user in).
+* @function checkForAvailableToken
+* @param  {Function} foundToken - A function with the parameter authData that will get called if a token.
+* @param  {Function} noToken - A function with the parameter error that will get called if no token is found. 
+* @example
+* ref.createUserWithEmail("john@doe.com", "correcthorsebatterystaple", function(userData){
+*      // The user creation was successful
+*      doStuffWith(userData);
+* })
+*/
+Firebase.prototype.checkForAvailableToken = function(foundToken, noToken){
+    var token = localStorage.getItem(this.tokenName);
+    if(token == null){
+        token = "No Token";
+    }
+    this.authWithCustomToken(token, function(error, authData) {
         if (error) {
-            console.log("No token found");
+            console.log("No token found" + authData);
+            noToken(error);
         } else {
             console.log("Existing token found");
+            foundToken(authData);
         }
     });
 }

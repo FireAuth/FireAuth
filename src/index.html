@@ -5,7 +5,11 @@
     <script src = "FireAuthProto.js"></script>
     <script>
         var ref = new Firebase("https://techlabproductivity.firebaseio.com/");
-        ref.checkForAvailableToken();
+        ref.checkForAvailableToken(function(){
+
+        },function(hello){
+
+        });
         console.log(ref.token)
 
     </script>
