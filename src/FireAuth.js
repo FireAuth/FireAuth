@@ -47,7 +47,7 @@ class FireAuth {
           this.token = "No Token";
         }
 
-        ref.authWithCustomToken(token, function(error, result) {
+        this.ref.authWithCustomToken(token, function(error, result) {
             if (error) {
                 console.log("No pre-existing token found");
             } else {
@@ -69,7 +69,7 @@ class FireAuth {
      * })
      */
     createUserWithEmail(email, password, callback){
-        ref.createUser({
+        this.ref.createUser({
             email    : email,
             password : password
         }, function(error, userData) {
@@ -100,7 +100,7 @@ class FireAuth {
      * })
      */
     loginWithEmail(email, password, token, callback){
-        ref.authWithPassword({
+        this.ref.authWithPassword({
             email    : email,
             password : password
         }, function authHandler(error, authData) {
@@ -132,7 +132,7 @@ class FireAuth {
      * })
      */
     changeUserPassword(email, oldPassword, newPassword, callback){
-        ref.changePassword({
+        this.ref.changePassword({
             email:email,
             oldPassword:oldPassword,
             newPassword:newPassword
@@ -168,7 +168,7 @@ class FireAuth {
      * })
      */
     changeUserEmail(oldEmail, newEmail, password, callback){
-        ref.changeEmail({
+        this.ref.changeEmail({
             email:email,
             oldPassword:oldPassword,
             newPassword:newPassword
@@ -202,7 +202,7 @@ class FireAuth {
      * })
      */
     resetUserPassword(email, callback){
-        ref.changeEmail({
+        this.ref.changeEmail({
             email:email,
             oldPassword:oldPassword,
             newPassword:newPassword
@@ -235,7 +235,7 @@ class FireAuth {
      * })
      */
     deleteUserWithEmail(email, password, callback){
-        ref.removeUser({
+        this.ref.removeUser({
             email: email,
             password: password
         }, function(error) {
@@ -275,13 +275,13 @@ class FireAuth {
      */
     loginWithFacebook(redirect, token, sessionTime, permissions, callback){
         if(redirect){
-            ref.authWithOAuthRedirect("facebook", function(error){
+            this.ref.authWithOAuthRedirect("facebook", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
                 }
             })
         }else{
-            ref.authWithOAuthPopup("facebook", function(error, authData){
+            this.ref.authWithOAuthPopup("facebook", function(error, authData){
                 if(error){
                     throw "Authentication Failed! " + error;
                 }else{
@@ -317,13 +317,13 @@ class FireAuth {
      */
     loginWithGithub(redirect, token, sessionTime, permissions, callback){
         if(redirect){
-            ref.authWithOAuthRedirect("github", function(error){
+            this.ref.authWithOAuthRedirect("github", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
                 }
             })
         }else{
-            ref.authWithOAuthPopup("github", function(error, authData){
+            this.ref.authWithOAuthPopup("github", function(error, authData){
                 if(error){
                     throw "Authentication Failed! " + error;
                 }else{
@@ -358,13 +358,13 @@ class FireAuth {
      */
     loginWithGoogle(redirect, token, sessionTime, permissions, callback){
         if(redirect){
-            ref.authWithOAuthRedirect("google", function(error){
+            this.ref.authWithOAuthRedirect("google", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
                 }
             })
         }else{
-            ref.authWithOAuthPopup("google", function(error, authData){
+            this.ref.authWithOAuthPopup("google", function(error, authData){
                 if(error){
                     throw "Authentication Failed! " + error;
                 }else{
@@ -404,13 +404,13 @@ class FireAuth {
     loginWithTwitter(options, callback){
         if(options.redirect){
 
-            ref.authWithOAuthRedirect("twitter", function(error){
+            this.ref.authWithOAuthRedirect("twitter", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
                 }
             })
         }else{
-            ref.authWithOAuthPopup("twitter", function(error, authData){
+            this.ref.authWithOAuthPopup("twitter", function(error, authData){
                 if(error){
                     throw "Authentication Failed! " + error;
                 }else{
@@ -435,7 +435,7 @@ class FireAuth {
      * @function logout
      */
     logout(){
-        ref.unauth();
+        this.ref.unauth();
         localStorage.removeItem(this.tokenName);
     }
 
@@ -454,8 +454,8 @@ class FireAuth {
      * })
      */
     authChangeListener(onLogin, onLogout){
-        ref.onAuth(function(authData){
-            if(ref.getAuth() == null){
+        this.ref.onAuth(function(authData){
+            if(this.ref.getAuth() == null){
                 //not logged in
                 onLogin(authData);
             }else{

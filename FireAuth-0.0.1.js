@@ -52,7 +52,7 @@ var FireAuth = (function () {
             this.token = "No Token";
         }
 
-        ref.authWithCustomToken(token, function (error, result) {
+        this.ref.authWithCustomToken(token, function (error, result) {
             if (error) {
                 console.log("No pre-existing token found");
             } else {
@@ -77,7 +77,7 @@ var FireAuth = (function () {
     _createClass(FireAuth, [{
         key: "createUserWithEmail",
         value: function createUserWithEmail(email, password, callback) {
-            ref.createUser({
+            this.ref.createUser({
                 email: email,
                 password: password
             }, function (error, userData) {
@@ -109,7 +109,7 @@ var FireAuth = (function () {
     }, {
         key: "loginWithEmail",
         value: function loginWithEmail(email, password, token, callback) {
-            ref.authWithPassword({
+            this.ref.authWithPassword({
                 email: email,
                 password: password
             }, function authHandler(error, authData) {
@@ -143,7 +143,7 @@ var FireAuth = (function () {
     }, {
         key: "changeUserPassword",
         value: function changeUserPassword(email, oldPassword, newPassword, callback) {
-            ref.changePassword({
+            this.ref.changePassword({
                 email: email,
                 oldPassword: oldPassword,
                 newPassword: newPassword
@@ -181,7 +181,7 @@ var FireAuth = (function () {
     }, {
         key: "changeUserEmail",
         value: function changeUserEmail(oldEmail, newEmail, password, callback) {
-            ref.changeEmail({
+            this.ref.changeEmail({
                 email: email,
                 oldPassword: oldPassword,
                 newPassword: newPassword
@@ -217,7 +217,7 @@ var FireAuth = (function () {
     }, {
         key: "resetUserPassword",
         value: function resetUserPassword(email, callback) {
-            ref.changeEmail({
+            this.ref.changeEmail({
                 email: email,
                 oldPassword: oldPassword,
                 newPassword: newPassword
@@ -252,7 +252,7 @@ var FireAuth = (function () {
     }, {
         key: "deleteUserWithEmail",
         value: function deleteUserWithEmail(email, password, callback) {
-            ref.removeUser({
+            this.ref.removeUser({
                 email: email,
                 password: password
             }, function (error) {
@@ -294,13 +294,13 @@ var FireAuth = (function () {
         key: "loginWithFacebook",
         value: function loginWithFacebook(redirect, token, sessionTime, permissions, callback) {
             if (redirect) {
-                ref.authWithOAuthRedirect("facebook", function (error) {
+                this.ref.authWithOAuthRedirect("facebook", function (error) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     }
                 });
             } else {
-                ref.authWithOAuthPopup("facebook", function (error, authData) {
+                this.ref.authWithOAuthPopup("facebook", function (error, authData) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     } else {
@@ -337,13 +337,13 @@ var FireAuth = (function () {
         key: "loginWithGithub",
         value: function loginWithGithub(redirect, token, sessionTime, permissions, callback) {
             if (redirect) {
-                ref.authWithOAuthRedirect("github", function (error) {
+                this.ref.authWithOAuthRedirect("github", function (error) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     }
                 });
             } else {
-                ref.authWithOAuthPopup("github", function (error, authData) {
+                this.ref.authWithOAuthPopup("github", function (error, authData) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     } else {
@@ -380,13 +380,13 @@ var FireAuth = (function () {
         key: "loginWithGoogle",
         value: function loginWithGoogle(redirect, token, sessionTime, permissions, callback) {
             if (redirect) {
-                ref.authWithOAuthRedirect("google", function (error) {
+                this.ref.authWithOAuthRedirect("google", function (error) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     }
                 });
             } else {
-                ref.authWithOAuthPopup("google", function (error, authData) {
+                this.ref.authWithOAuthPopup("google", function (error, authData) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     } else {
@@ -428,13 +428,13 @@ var FireAuth = (function () {
         value: function loginWithTwitter(options, callback) {
             if (options.redirect) {
 
-                ref.authWithOAuthRedirect("twitter", function (error) {
+                this.ref.authWithOAuthRedirect("twitter", function (error) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     }
                 });
             } else {
-                ref.authWithOAuthPopup("twitter", function (error, authData) {
+                this.ref.authWithOAuthPopup("twitter", function (error, authData) {
                     if (error) {
                         throw "Authentication Failed! " + error;
                     } else {
@@ -458,7 +458,7 @@ var FireAuth = (function () {
     }, {
         key: "logout",
         value: function logout() {
-            ref.unauth();
+            this.ref.unauth();
             localStorage.removeItem(this.tokenName);
         }
 
@@ -479,8 +479,8 @@ var FireAuth = (function () {
     }, {
         key: "authChangeListener",
         value: function authChangeListener(onLogin, onLogout) {
-            ref.onAuth(function (authData) {
-                if (ref.getAuth() == null) {
+            this.ref.onAuth(function (authData) {
+                if (this.ref.getAuth() == null) {
                     //not logged in
                     onLogin(authData);
                 } else {
