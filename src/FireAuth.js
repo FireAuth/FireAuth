@@ -229,6 +229,8 @@ class FireAuth {
         })
     }
 
+
+
     /**
      * Deletes a Firebase user with Email and Password Authentication.
      * @function deleteUserWithEmail
