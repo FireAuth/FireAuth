@@ -40,14 +40,14 @@ class FireAuth {
     constructor(firebaseURL){
 
         this.ref = new Firebase(firebaseURL);
-        this.tokenName = ''
+        this.tokenName = 'token'
         this.token = localStorage.getItem(this.tokenName);
 
         if(this.token == null){
           this.token = "No Token";
         }
 
-        this.ref.authWithCustomToken(token, function(error, result) {
+        this.ref.authWithCustomToken(this.token, function(error, result) {
             if (error) {
                 console.log("No pre-existing token found");
             } else {
