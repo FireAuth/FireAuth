@@ -246,7 +246,7 @@ Logs in a Firebase user with Twitter Authentication. Make sure your application 
 | options.redirect | <code>boolean</code> | Whether the webpage should redirect the current page. If false or not defined the webpage will just open a popup to Twitter. |
 | options.token | <code>boolean</code> | True to create an auth token, false or undefined to not create one. |
 | options.sessionTime | <code>string</code> | If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of  your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication  data at all and will end authentication as soon as the page is closed. |
-| callback | <code>function</code> | Optional callback function with parameter [error and authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in)  that will not get called if redirect is true. (Called upon successful or unsuccessful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function] |
+| callback | <code>function</code> | Optional callback function with parameters [error](https://www.firebase.com/docs/web/guide/user-auth.html#section-full-error) and  [authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in) that will not get called if redirect is true.  (Called upon successful or unsuccessful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function] |
 
 **Example**  
 ```js
