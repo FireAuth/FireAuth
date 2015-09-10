@@ -182,9 +182,9 @@ var FireAuth = (function () {
         key: "changeUserEmail",
         value: function changeUserEmail(oldEmail, newEmail, password, callback) {
             this.ref.changeEmail({
-                email: email,
-                oldPassword: oldPassword,
-                newPassword: newPassword
+                oldEmail: oldEmail,
+                newEmail: newEmail,
+                password: password
             }, function (error) {
                 if (error) {
                     switch (error.code) {
