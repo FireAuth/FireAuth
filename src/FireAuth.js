@@ -31,6 +31,9 @@
 
 class FireAuth {
 
+    var ref
+    var tokenName
+    var token
     /**
      * Represents an instance of FireAuth.
      * @constructor
@@ -39,7 +42,7 @@ class FireAuth {
     constructor(firebaseURL){
 
         this.ref = new Firebase(firebaseURL);
-        this.tokenName = this.tokenName;
+        this.tokenName = ''
         this.token = localStorage.getItem(this.tokenName);
 
         if(token == null){
@@ -385,18 +388,22 @@ class FireAuth {
     /**
      * Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
      * @function loginWithTwitter
-     * @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
-     * @param {boolean} token - True to create an auth token, false to not create one.
+     * @param {object} options - Object with optional values
+     * @param {boolean} options.redirect - Whether the webpage should redirect the current page. If false or not defined the webpage will just open a popup to Twitter.
+     * @param {boolean} options.token - True to create an auth token, false or undefined to not create one.
+     * @param {string} options.sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of 
+     * your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication 
+     * data at all and will end authentication as soon as the page is closed.
      * @param {Function} callback - Optional callback function with parameter authData that will not get called if redirect is true. (Called upon successful login)
-     * @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
+     * 
      * @example
      * fireAuthInstance.loginWithTwitter(false, function(authData){
      *      // The authentication was successful and opened within a popup.
      *      doStuffWith(authData);
      * }, "sessionOnly");
      */
-    loginWithTwitter(redirect, token, callback, sessionTime){
-        if(redirect){
+    loginWithTwitter(options, callback){
+        if(options.redirect){
             ref.authWithOAuthRedirect("twitter", function(error){
                 if(error){
                     throw "Authentication Failed! " + error;
@@ -408,7 +415,7 @@ class FireAuth {
                     throw "Authentication Failed! " + error;
                 }else{
                     console.log("Authenticated successfully with payload:", authData);
-                    if(token){
+                    if(options.token){
                         localStorage.setItem(this.tokenName, authData.token);
                     }
                     if(typeof callback == "function"){
@@ -416,7 +423,7 @@ class FireAuth {
                     }
                 }
             }, {
-                remember: sessionTime
+                remember: options.sessionTime
             });
         }
     }
