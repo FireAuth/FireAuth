@@ -48,8 +48,8 @@ var FireAuth = (function () {
         this.tokenName = '';
         this.token = localStorage.getItem(this.tokenName);
 
-        if (token == null) {
-            token = "No Token";
+        if (this.token == null) {
+            this.token = "No Token";
         }
 
         ref.authWithCustomToken(token, function (error, result) {
