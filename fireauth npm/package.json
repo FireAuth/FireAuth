@@ -1,25 +1,29 @@
 {
-  "name": "fireauth",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FireAuth/FireAuth.git"
-  },
-  "keywords": [
-    "firebase",
-    "tokens",
-    "user",
-    "authentication"
-  ],
-  "author": "Ayush Jain <ayush@techlabeducation.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/FireAuth/FireAuth/issues"
-  },
-  "homepage": "https://github.com/FireAuth/FireAuth#readme"
+    "name": "fireauth",
+    "version": "1.0.3",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/FireAuth/FireAuth.git"
+    },
+    "dependencies": {
+        "firebase": "2.2.9",
+        "localStorage": "1.0.3"
+    },
+    "keywords": [
+        "firebase",
+        "tokens",
+        "user",
+        "authentication"
+    ],
+    "author": "Ayush Jain <ayush@techlabeducation.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/FireAuth/FireAuth/issues"
+    },
+    "homepage": "https://github.com/FireAuth/FireAuth#readme"
 }

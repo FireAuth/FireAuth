@@ -24,9 +24,6 @@
 var Firebase = require('firebase');
 var localStorage = require('localStorage');
 
-var ref = new Firebase("https://techlabproductivity.firebaseio.com/");
-
-
 
 Firebase.prototype.tokenName = "myToken";
 
