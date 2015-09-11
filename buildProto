@@ -1,7 +1,7 @@
 #!/bin/bash
 # creates documentation for prototype version
 
-jsdoc2md Deployment/FireAuthProto.js > docs/docs.md
+jsdoc2md deployment/FireAuthProto.js > docs/docs.md
 
 echo "Built documentation."
 

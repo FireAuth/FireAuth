@@ -1,7 +1,7 @@
 #!/bin/bash
 # Builds to JS es5 and creates documentation
 
-babel src/FireAuth.js --out-file Deployment/FireAuth-0.0.1.js
+babel src/FireAuth.js --out-file deployment/FireAuth-0.0.1.js
 
 echo "Compiled to es5."
 
