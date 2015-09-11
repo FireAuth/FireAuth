@@ -1,6 +1,6 @@
 # FireAuth
 
-##### An Open Source JavaScript wrapper for Firebase's native and third-party authentication. 
+##### An Open Source JavaScript wrapper for Firebase's native and third-party authentication.
 
 ## Setup
 
@@ -12,9 +12,13 @@ or
 
 `<script src="path/to/FireAuth-0.0.1.js"></script>`
 
+
 #####JS
+######Example
 ```javascript
-ref.createUserWithEmail("johnDoe@gmail.com", "thisismypassword", function(error, userData){        //creates a user
+var ref = new Firebase("https://bu1691k7rvt.firebaseio-demo.com/");
+
+ref.createUserWithEmail("johndoe@gmail.com", "thisismypassword", function(error, userData){        //creates a user
     if(error){
         console.log("Account creation failed: " + error);     //user creation unsuccessful
     } else{
@@ -33,7 +37,7 @@ ref.createUserWithEmail("johnDoe@gmail.com", "thisismypassword", function(error,
     }
 });
 
-ref.loginWithEmail("johnDoe@gmail.com", "thisismypassword", true, function(authData){      //logs in a user
+ref.loginWithEmail("johndoe@gmail.com", "thisismypassword", true, function(authData){      //logs in a user
     var userRef = ref.child('user').child(authData.uid);      //access the users information from JSON tree
     userRef.once('value', function(snapshot){
         console.log(snapshot.val().username.val);      //prints out the users email which was stored in the JSON tree
@@ -44,6 +48,24 @@ ref.loginWithEmail("johnDoe@gmail.com", "thisismypassword", true, function(authD
 
 ref.logout();      //logs user out
 ```
+
+#####Node Module
+
+######Installation
+```
+npm install fireauth
+```
+######NodeJS Usage
+```javascript
+var Firebase = require('firebase');   //the class firebase must be capitalized as shown.
+var fireauth = require('fireauth');
+
+var ref = new Firebase("https://bu1691k7rvt.firebaseio-demo.com/");
+
+//Now you have access to all of the JS functions.
+
+```
+
 
 ##### In order to use FireAuth, you must enable User Authentication in your Firebase Authentication Settings
 
@@ -56,5 +78,3 @@ ref.logout();      //logs user out
 ##### [Google](https://www.firebase.com/docs/web/guide/login/google.html)
 
 ##### [Twitter](https://www.firebase.com/docs/web/guide/login/twitter.html)
-
-
