@@ -22,7 +22,6 @@
 
 "use strict";
 
-
 Firebase.prototype.tokenName = "myToken";
 
 /**
@@ -44,7 +43,7 @@ Firebase.prototype.checkForAvailableToken = function(foundToken, noToken){
     }
     this.authWithCustomToken(token, function(error, authData) {
         if (error) {
-            console.log("No token found" + authData);
+            console.log("No token found");
             noToken(error);
         } else {
             console.log("Existing token found");
@@ -131,11 +130,11 @@ Firebase.prototype.loginWithEmail = function(email, password, token, callback){
 *      // Password has been changed - handle anything else here.
 * })
 */
-Firebase.prototype.changeUserPassword = function(email, oldPassword, newPassword, callback){
+Firebase.prototype.changeUserPassword = function(oldEmail, newEmail, password, callback){
     this.changePassword({
-        email:email,
-        oldPassword:oldPassword,
-        newPassword:newPassword
+        oldEmail: oldEmail,
+        newEmail: newEmail,
+        password: password
     }, function(error){
         if(error){
             switch (error.code) {
@@ -276,6 +275,7 @@ Firebase.prototype.deleteUserWithEmail = function(email, password, callback){
 * });
 */
 Firebase.prototype.loginWithFacebook = function(redirect, token, sessionTime, permissions, callback){
+    var ref = this;
     if(redirect){
         this.authWithOAuthRedirect("facebook", function(error){
             if(error){
@@ -289,7 +289,7 @@ Firebase.prototype.loginWithFacebook = function(redirect, token, sessionTime, pe
             }else{
                 console.log("Authenticated successfully with payload:", authData);
                 if(token){
-                    localStorage.setItem(this.tokenName, authData.token);
+                    localStorage.setItem(ref.tokenName, authData.token);
                 }
                 if(typeof callback == "function"){
                     callback(authData);
@@ -318,6 +318,7 @@ Firebase.prototype.loginWithFacebook = function(redirect, token, sessionTime, pe
 * });
 */
 Firebase.prototype.loginWithGithub = function(redirect, token, sessionTime, permissions, callback){
+    var ref = this;
     if(redirect){
         this.authWithOAuthRedirect("github", function(error){
             if(error){
@@ -331,7 +332,7 @@ Firebase.prototype.loginWithGithub = function(redirect, token, sessionTime, perm
             }else{
                 console.log("Authenticated successfully with payload:", authData);
                 if(token){
-                    localStorage.setItem(this.tokenName, authData.token);
+                    localStorage.setItem(ref.tokenName, authData.token);
                 }
                 if(typeof callback == "function"){
                     callback(authData);
@@ -359,6 +360,7 @@ Firebase.prototype.loginWithGithub = function(redirect, token, sessionTime, perm
 * });
 */
 Firebase.prototype.loginWithGoogle = function(redirect, token, sessionTime, permissions, callback){
+    var ref = this;
     if(redirect){
         this.authWithOAuthRedirect("google", function(error){
             if(error){
@@ -372,7 +374,7 @@ Firebase.prototype.loginWithGoogle = function(redirect, token, sessionTime, perm
             }else{
                 console.log("Authenticated successfully with payload:", authData);
                 if(token){
-                    localStorage.setItem(this.tokenName, authData.token);
+                    localStorage.setItem(ref.tokenName, authData.token);
                 }
                 if(typeof callback == "function"){
                     callback(authData);
@@ -399,6 +401,7 @@ Firebase.prototype.loginWithGoogle = function(redirect, token, sessionTime, perm
 * });
 */
 Firebase.prototype.loginWithTwitter = function(redirect, token, sessionTime, callback){
+    var ref = this;
     if(redirect){
         this.authWithOAuthRedirect("twitter", function(error){
             if(error){
@@ -412,7 +415,7 @@ Firebase.prototype.loginWithTwitter = function(redirect, token, sessionTime, cal
             }else{
                 console.log("Authenticated successfully with payload:", authData);
                 if(token){
-                    localStorage.setItem(this.tokenName, authData.token);
+                    localStorage.setItem(ref.tokenName, authData.token);
                 }
                 if(typeof callback == "function"){
                     callback(authData);
