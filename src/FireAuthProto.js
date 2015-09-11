@@ -263,20 +263,31 @@ Firebase.prototype.deleteUserWithEmail = function(email, password, callback){
 /**
 * Logs in a Firebase user with Facebook Authentication. Make sure your application is [configured as a Facebook App](https://www.firebase.com/docs/web/guide/login/facebook.html).
 * @function loginWithFacebook
-* @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Facebook.
-* @param {boolean} token - True to create an auth token, false to not create one.
-* @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
-* @param {string} permissions - A set of permissions your application may want to access from the user's Facebook account. Certain permissions will have to be approved by the user and Facebook. Each of these permissions can be accessed through the callback. [Click here](https://developers.facebook.com/docs/facebook-login/permissions/v2.4) to view some of the permissions that can be access from Facebook.
-* @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/facebook.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
+* @param {boolean} options.redirect - Whether the webpage should redirect the current page. If false or not defined the webpage will just open a popup to Twitter.
+* @param {boolean} options.token - True to create an auth token, false or undefined to not create one.
+* @param {string} options.sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
+* @param {string} options.permissions - A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github.
+* @param {Function} callback - Optional callback function with parameters [error](https://www.firebase.com/docs/web/guide/user-auth.html#section-full-error) and [authData](https://www.firebase.com/docs/web/guide/login/facebook.html#section-logging-in) that will not get called if redirect is true. (Called upon successful or unsuccessful login) [NOTE: Alternatively, the authData from any login method can be accessed universally from the "authChangeListener" function]
 * @example
-* ref.loginWithFacebook(false, true, "default", "email, user_likes" , function(authData){
-*      // The authentication was successful and opened within a popup.
-*      doStuffWith(authData);
+* var settings = {
+*       token: false,
+*       redirect: true,
+*       sessionTime: "none",
+*       permissions: "email, user_likes"
+* };
+*
+* ref.loginWithFacebook(settings, function(error, authData){
+*       // The authentication was successful and opened within a popup.
+*       if(error){
+*           debugError(error);
+*       }else{
+*          doStuffWith(authData);
+*       }
 * });
 */
-Firebase.prototype.loginWithFacebook = function(redirect, token, sessionTime, permissions, callback){
+Firebase.prototype.loginWithFacebook = function(options, callback){
     var ref = this;
-    if(redirect){
+    if(options.redirect){
         this.authWithOAuthRedirect("facebook", function(error){
             if(error){
                 throw "Authentication Failed! " + error;
@@ -288,7 +299,7 @@ Firebase.prototype.loginWithFacebook = function(redirect, token, sessionTime, pe
                 throw "Authentication Failed! " + error;
             }else{
                 console.log("Authenticated successfully with payload:", authData);
-                if(token){
+                if(options.token){
                     localStorage.setItem(ref.tokenName, authData.token);
                 }
                 if(typeof callback == "function"){
@@ -296,8 +307,8 @@ Firebase.prototype.loginWithFacebook = function(redirect, token, sessionTime, pe
                 }
             }
         },{
-            remember: sessionTime,
-            scope: permissions
+            remember: options.sessionTime,
+            scope: options.permissions
         });
     }
 }
@@ -306,20 +317,31 @@ Firebase.prototype.loginWithFacebook = function(redirect, token, sessionTime, pe
 /**
 * Logs in a Firebase user with GitHub Authentication. Make sure your application is [configured as a GitHub App](https://www.firebase.com/docs/web/guide/login/github.html).
 * @function loginWithGithub
-* @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to GitHub.
-* @param {boolean} token - True to create an auth token, false to not create one.
-* @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
-* @param {string} permissions - A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github.
-* @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/github.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
+* @param {boolean} options.redirect - Whether the webpage should redirect the current page. If false or not defined the webpage will just open a popup to Twitter.
+* @param {boolean} options.token - True to create an auth token, false or undefined to not create one.
+* @param {string} options.sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
+* @param {string} options.permissions - A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github.
+* @param {Function} callback - Optional callback function with parameters [error](https://www.firebase.com/docs/web/guide/user-auth.html#section-full-error) and [authData](https://www.firebase.com/docs/web/guide/login/github.html#section-logging-in) that will not get called if redirect is true. (Called upon successful or unsuccessful login) [NOTE: Alternatively, the authData from any login method can be accessed universally from the "authChangeListener" function]
 * @example
-* ref.loginWithGithub(false, false, "default", "user, notifications, read:org" , function(authData){
-*      // The authentication was successful and opened within a popup.
-*      doStuffWith(authData);
+* var settings = {
+*       token: true,
+*       redirect: false,
+*       sessionTime: "default",
+*       permissions: "user, notifications, read:org"
+* };
+*
+* ref.loginWithGithub(settings, function(error, authData){
+*       // The authentication was successful and opened within a popup.
+*       if(error){
+*           debugError(error);
+*       }else{
+*          doStuffWith(authData);
+*       }
 * });
 */
-Firebase.prototype.loginWithGithub = function(redirect, token, sessionTime, permissions, callback){
+Firebase.prototype.loginWithGithub = function(options, callback){
     var ref = this;
-    if(redirect){
+    if(options.redirect){
         this.authWithOAuthRedirect("github", function(error){
             if(error){
                 throw "Authentication Failed! " + error;
@@ -331,16 +353,16 @@ Firebase.prototype.loginWithGithub = function(redirect, token, sessionTime, perm
                 throw "Authentication Failed! " + error;
             }else{
                 console.log("Authenticated successfully with payload:", authData);
-                if(token){
+                if(options.token){
                     localStorage.setItem(ref.tokenName, authData.token);
                 }
                 if(typeof callback == "function"){
-                    callback(authData);
+                    callback(error, authData);
                 }
             }
         }, {
-            remember: sessionTime,
-            scope: permissions
+            remember: options.sessionTime,
+            scope: options.permissions
         });
     }
 }
@@ -348,20 +370,31 @@ Firebase.prototype.loginWithGithub = function(redirect, token, sessionTime, perm
 /**
 * Logs in a Firebase user with Google Authentication. Make sure your application is [configured as a Google App](https://www.firebase.com/docs/web/guide/login/google.html).
 * @function loginWithGoogle
-* @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Google.
-* @param {boolean} token - True to create an auth token, false to not create one.
-* @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
-* @param {string} permissions - A set of permissions your application may want to access from the user's Google account. Certain permissions will have to be approved by the user and Google. Each of these permissions can be accessed through the callback. [Click here](https://developers.google.com/+/web/api/rest/oauth#scopes) to view some of the permissions that can be access from Google.
-* @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/google.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login) [NOTE: Alternatively, this can be done with the "authChangeListener" function]
+* @param {boolean} options.redirect - Whether the webpage should redirect the current page. If false or not defined the webpage will just open a popup to Twitter.
+* @param {boolean} options.token - True to create an auth token, false or undefined to not create one.
+* @param {string} options.sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
+* @param {string} options.permissions - A set of permissions your application may want to access from the user's Github account. Certain permissions will have to be approved by the user and Github. Each of these permissions can be accessed through the callback. [Click here](https://developer.github.com/v3/oauth/#scopes) to view some of the permissions that can be access from Github.
+* @param {Function} callback - Optional callback function with parameters [error](https://www.firebase.com/docs/web/guide/user-auth.html#section-full-error) and [authData](https://www.firebase.com/docs/web/guide/login/google.html#section-logging-in) that will not get called if redirect is true. (Called upon successful or unsuccessful login) [NOTE: Alternatively, the authData from any login method can be accessed universally from the "authChangeListener" function]
 * @example
-* ref.loginWithGoogle(true, false "none", "profile, openid" , function(authData){
-*      // The authentication was successful and opened within a popup.
-*      doStuffWith(authData);
+* var settings = {
+*       token: true,
+*       redirect: false,
+*       sessionTime: "none",
+*       permissions: "profile, openid"
+* };
+*
+* ref.loginWithGoogle(settings, function(error, authData){
+*       // The authentication was successful and opened within a popup.
+*       if(error){
+*           debugError(error);
+*       }else{
+*          doStuffWith(authData);
+*       }
 * });
 */
-Firebase.prototype.loginWithGoogle = function(redirect, token, sessionTime, permissions, callback){
+Firebase.prototype.loginWithGoogle = function(options, callback){
     var ref = this;
-    if(redirect){
+    if(options.redirect){
         this.authWithOAuthRedirect("google", function(error){
             if(error){
                 throw "Authentication Failed! " + error;
@@ -373,36 +406,49 @@ Firebase.prototype.loginWithGoogle = function(redirect, token, sessionTime, perm
                 throw "Authentication Failed! " + error;
             }else{
                 console.log("Authenticated successfully with payload:", authData);
-                if(token){
+                if(options.token){
                     localStorage.setItem(ref.tokenName, authData.token);
                 }
-                if(typeof callback == "function"){
-                    callback(authData);
-                }
             }
+
+            if(typeof callback == "function"){
+                callback(error, authData);
+            }
+
         }, {
-            remember: sessionTime,
-            scope: permissions
+            remember: options.sessionTime,
+            scope: options.permissions
         });
     }
 }
 
 /**
-* Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
-* @function loginWithTwitter
-* @param {boolean} redirect - Whether the webpage should redirect the current page. If false the webpage will just open a popup to Twitter.
-* @param {boolean} token - True to create an auth token, false to not create one.
-* @param {string} sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
-* @param {Function} callback - Optional callback function with parameter [authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in) that will not get called if redirect is true. (Called upon successful login)[NOTE: Alternatively, this can be done with the "authChangeListener" function]
-* @example
-* ref.loginWithTwitter(false, true, "sessionOnly", function(authData){
-*      // The authentication was successful and opened within a popup.
-*      doStuffWith(authData);
-* });
-*/
-Firebase.prototype.loginWithTwitter = function(redirect, token, sessionTime, callback){
+ * Logs in a Firebase user with Twitter Authentication. Make sure your application is [configured as a Twitter App](https://www.firebase.com/docs/web/guide/login/twitter.html).
+ * @function loginWithTwitter
+ * @param {object} options - Object with optional values.
+ * @param {boolean} options.redirect - Whether the webpage should redirect the current page. If false or not defined the webpage will just open a popup to Twitter.
+ * @param {boolean} options.token - True to create an auth token, false or undefined to not create one.
+ * @param {string} options.sessionTime - If not specified - or set to default - sessions are persisted for as long as you have configured in the Login & Auth tab of your App Dashboard. To limit persistence to the lifetime of the current window, set this to sessionOnly. A value of none will not persist authentication data at all and will end authentication as soon as the page is closed.
+ * @param {Function} callback - Optional callback function with parameters [error](https://www.firebase.com/docs/web/guide/user-auth.html#section-full-error) and [authData](https://www.firebase.com/docs/web/guide/login/twitter.html#section-logging-in) that will not get called if redirect is true. (Called upon successful or unsuccessful login) [NOTE: Alternatively, the authData from any login method can be accessed universally from the "authChangeListener" function]
+ * @example
+ * var settings = {
+ *      redirect: true,
+ *      token: false,
+ *      sessionTime: "default"
+ * };
+ *
+ * ref.loginWithTwitter(settings, function(error, authData){
+ *      // The authentication was successful and opened within a popup.
+ *      if(error){
+ *          debugError(error);
+ *      }else{
+ *           doStuffWith(authData);
+ *      }
+ * });
+ */
+Firebase.prototype.loginWithTwitter = function(options, callback){
     var ref = this;
-    if(redirect){
+    if(options.redirect){
         this.authWithOAuthRedirect("twitter", function(error){
             if(error){
                 throw "Authentication Failed! " + error;
@@ -414,15 +460,22 @@ Firebase.prototype.loginWithTwitter = function(redirect, token, sessionTime, cal
                 throw "Authentication Failed! " + error;
             }else{
                 console.log("Authenticated successfully with payload:", authData);
-                if(token){
+                if(options.token){
                     localStorage.setItem(ref.tokenName, authData.token);
                 }
-                if(typeof callback == "function"){
-                    callback(authData);
-                }
             }
-        }, {
-            remember: sessionTime
+
+            if(typeof callback == "function"){
+                callback(error, authData);
+            }
+
+            //warns the user that scope is not defined for twitter login
+            if(!options.permissions){
+                console.warn("WARNING: The twitter firebase api currently does not support the use of scope/permissions. However, the Github, Facebook and Google firebase api do support this.");
+            }
+        },
+        {
+            remember: options.sessionTime;
         });
     }
 }
@@ -450,7 +503,7 @@ Firebase.prototype.logout = function(){
 * }, function(authData){
 *      //The user has logged out
 *      doStuffWith(authData);
-* })
+* });
 */
 Firebase.prototype.authChangeListener = function(onLogin, onLogout){
     this.onAuth(function(authData){
