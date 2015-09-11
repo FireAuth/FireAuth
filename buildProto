@@ -1,0 +1,12 @@
+#!/bin/bash
+# creates documentation for prototype version
+
+jsdoc2md src/FireAuthProto.js > docs/docs.md
+
+echo "Built documentation."
+
+node docs/documentation.js
+
+echo "Appended documentation."
+
+echo "Build Complete."

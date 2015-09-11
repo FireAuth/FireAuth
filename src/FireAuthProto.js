@@ -475,7 +475,7 @@ Firebase.prototype.loginWithTwitter = function(options, callback){
             }
         },
         {
-            remember: options.sessionTime;
+            remember: options.sessionTime
         });
     }
 }
