@@ -4,7 +4,7 @@
 
 ## Setup
 
-#####HTML
+##### HTML
 
 `<script src="https://rawgit.com/FireAuth/FireAuth/master/FireAuth-0.0.1.js"></script>`
 
@@ -13,8 +13,8 @@ or
 `<script src="path/to/FireAuth-0.0.1.js"></script>`
 
 
-#####JS
-######Example
+##### JS
+###### Example
 ```javascript
 var ref = new Firebase("https://bu1691k7rvt.firebaseio-demo.com/");
 
@@ -49,13 +49,13 @@ ref.loginWithEmail("johndoe@gmail.com", "thisismypassword", true, function(authD
 ref.logout();      //logs user out
 ```
 
-#####Node Module
+##### Node Module
 
-######Installation
+###### Installation
 ```
 npm install fireauth
 ```
-######NodeJS Usage
+###### NodeJS Usage
 ```javascript
 var Firebase = require('firebase');   //the class firebase must be capitalized as shown.
 var fireauth = require('fireauth');
